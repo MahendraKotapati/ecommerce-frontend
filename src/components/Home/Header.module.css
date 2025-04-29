@@ -1,0 +1,20 @@
+.header_container {
+    padding: 12px 100px;
+    display: flex;
+}
+
+.brand {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.nav_title {
+    font-size: 16px;
+}
+
+.nav_container {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    margin: 0 32px;
+}
