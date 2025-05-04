@@ -1,6 +1,5 @@
-import styles from "./Header.module.css"
-
-const BRAND_NAME = "SPEND";
+import styles from "./Header.module.css";
+import { BRAND_NAME } from "./Home";
 
 export const Header = () => {
 

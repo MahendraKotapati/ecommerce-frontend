@@ -1,6 +1,6 @@
 import { Product } from "@/models/Product";
 import { ProductCard } from "./ProductCard";
-import styles from "./section.module.css";
+import styles from "./Section.module.css";
 
 interface Props {
     sectionData: {title: string, products: Product[]};
