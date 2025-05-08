@@ -15,6 +15,7 @@ export interface Review {
 interface Props {
     review: Review;
     customStyles?: string;
+    showDate?: boolean
 }
 
 export const ReviewCard = (props: Props) => {
@@ -22,7 +23,7 @@ export const ReviewCard = (props: Props) => {
 
     const roundedRating = ((rating ?? 0) * 2) / 2;
     const hasHalfStar = roundedRating != Math.floor(roundedRating);
-    const showPostedDate = false;
+    const showPostedDate = props.showDate;
 
     return (
         <div className={`border-1 border-border rounded-2xl py-7 px-8 ${props.customStyles}`}>

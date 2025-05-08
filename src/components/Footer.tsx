@@ -43,8 +43,8 @@ export const Footer = () => {
                             <div>
                                 <p style={{fontSize: 16}}> {f.title} </p>
                                 {
-                                    f.links.map((link) => {
-                                        return (<SecondaryText className="mt-3"> {link} </SecondaryText>);
+                                    f.links.map((link, index) => {
+                                        return (<SecondaryText key={index} className="mt-3"> {link} </SecondaryText>);
                                     })
                                 }           
                             </div>

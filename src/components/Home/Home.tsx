@@ -18,8 +18,8 @@ export const Home = () => {
             <Header></Header>
             <Banner></Banner>
             {
-                dynamicSections.map((sectionData) => {
-                    return (<Section key={sectionData.title} sectionData={sectionData} />)
+                dynamicSections.map((sectionData, index) => {
+                    return (<Section key={sectionData.title} isLast={index==dynamicSections.length-1} sectionData={sectionData} />)
                 })
             }
             <DressStyleGrid />

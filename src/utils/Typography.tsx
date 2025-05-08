@@ -3,7 +3,7 @@ export const BigTitle = ({ children }: {children: any}) => (
   );
   
   export const Title = ({ children, className = '' }: {children: any, className?: string}) => (
-    <h2 className={`text-2xl font-semibold text-gray-800 ${className}`}>{children}</h2>
+    <h2 className={`text-[24px] font-semibold ${className}`}>{children}</h2>
   );
   
   export const SecondaryText = ({ children, className = '' }: {children: any, className?: string}) => (
