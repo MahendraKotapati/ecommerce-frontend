@@ -1,13 +1,19 @@
+import { useRouter } from "next/router";
 import styles from "./Header.module.css";
 import { BRAND_NAME } from "./Home";
 
 export const Header = () => {
 
     const navigation = ["Shop", "On Sale", "New Arrivals", "Brands"];
+    const router = useRouter();
+
+    const goToHome = () => {
+      router.push('/');
+    };
 
     return (
         <div className={styles.header_container}>
-            <div className={styles.brand}>{BRAND_NAME}</div>
+            <div className={styles.brand + " cursor-pointer"} onClick={goToHome}>{BRAND_NAME}</div>
             <div className={styles.nav_container}>
                 {
                     navigation.map((navTitle) => {

@@ -29,8 +29,8 @@ export const ReviewCard = (props: Props) => {
         <div className={`border-1 border-border rounded-2xl py-7 px-8 ${props.customStyles}`}>
             <div className="flex gap-1.5 mb-4">
                 {
-                    Array(Math.floor(roundedRating)).fill(0).map(() => {
-                        return <FaStar className="h-5.5 w-5.5" color="#FFC633"/> 
+                    Array(Math.floor(roundedRating)).fill(0).map((index) => {
+                        return <FaStar key={index} className="h-5.5 w-5.5" color="#FFC633"/> 
                     })
                 }
                 {

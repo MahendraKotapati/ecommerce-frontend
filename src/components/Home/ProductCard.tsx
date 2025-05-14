@@ -2,8 +2,7 @@ import { Product } from "@/models/Product";
 import styles from "./productCard.module.css";
 import { FaStar } from "react-icons/fa6";
 import { FaStarHalf } from "react-icons/fa6";
-import { SecondaryText, Title } from "@/utils/Typography";
-
+import { useRouter } from "next/router";
 
 interface Props {
     product: Product;
@@ -15,8 +14,14 @@ export const ProductCard = (props: Props) => {
     const hasHalfStar = roundedRating != Math.floor(roundedRating);
     const discountPercentage = Math.floor((((discountedPrice || 0) - price) / price)*100);
 
+    const router = useRouter();
+    
+    const goToProduct = () => {
+        router.push(`/product/${id}`);
+    };
+
     return (
-    <div>
+    <div className="cursor-pointer" onClick={goToProduct}>
         <img src={"/"+ imageUrl} className={styles.image}></img>
         <p className="text-[18px] mt-4 capitalize font-semibold">
             {name.toLowerCase()}

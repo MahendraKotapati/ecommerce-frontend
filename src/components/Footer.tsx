@@ -55,9 +55,9 @@ export const Footer = () => {
             </div>
             <hr className="mt-10 text-[#00000019]" />
             <div className="mt-3 ml-auto flex gap-2">
-                {PAYMENTS_ACCEPTED.map((icon) => {
+                {PAYMENTS_ACCEPTED.map((icon, index) => {
                     return (
-                        <div className="w-11 h-8 p-1 bg-white border border-tertiary rounded-md flex items-center justify-center">
+                        <div key={index} className="w-11 h-8 p-1 bg-white border border-tertiary rounded-md flex items-center justify-center">
                             <img src={icon}></img>
                         </div>
                     )
