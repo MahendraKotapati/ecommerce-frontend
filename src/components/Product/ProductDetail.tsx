@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Footer } from "../Footer";
 import { ReviewList } from "./ReviewLis";
 import { Section } from "../Home/Section";
-import { SUGGESTED_PRODUCTS_LIST } from "@/utils/Constant";
+import { PRODUCTS_LIST } from "@/utils/Constant";
 import { ProductBuyPanel } from "./ProductBuyPanel";
 import { Header } from "../Home/Header";
 
@@ -23,7 +23,7 @@ export const ProductDetail = (props: Props) => {
 
     const [product, setProduct] = useState<Product>({rating: 4, price: 300, discountedPrice: 150} as Product);
     const [selectedTab, setSelectedTab] = useState(TAB.REVIEWS);
-    const [suggestedProducts, setSuggestedProducts] = useState<Product[]>(SUGGESTED_PRODUCTS_LIST);
+    const [suggestedProducts, setSuggestedProducts] = useState<Product[]>(PRODUCTS_LIST.slice(0, 4));
 
     useEffect(() => {
 

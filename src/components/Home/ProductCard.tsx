@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 
 interface Props {
     product: Product;
+    customStyles?: string;
 }
 
 export const ProductCard = (props: Props) => {
@@ -22,7 +23,7 @@ export const ProductCard = (props: Props) => {
 
     return (
     <div className="cursor-pointer" onClick={goToProduct}>
-        <img src={"/"+ imageUrl} className={styles.image}></img>
+        <img src={"/"+ imageUrl} className={`w-[295px] h-[295px] rounded-[20px] ${props.customStyles}`}></img>
         <p className="text-[18px] mt-4 capitalize font-semibold">
             {name.toLowerCase()}
         </p>

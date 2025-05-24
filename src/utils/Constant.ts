@@ -22,12 +22,22 @@ export const DYNAMIC_SECTIONS_DATA = [
 ];
 
 // for Product Page
-export const SUGGESTED_PRODUCTS_LIST = [
+export const PRODUCTS_LIST = [
     {id: "1", name: "VERTICAL STRIPED SHIRT", description: "VERTICAL STRIPED SHIRT Desc", discountedPrice: 212, price: 232, quatity: 100, imageUrl: "top-selling/P1.png", rating: 5},
     {id: "2", name: "COURAGE GRAPHIC T-SHIRT", description: "COURAGE GRAPHIC T-SHIRT Desc", price: 145, quatity: 100, imageUrl: "top-selling/P2.png", rating: 4},
     {id: "3", name: "LOOSE FIT BERMUDA SHORTS", description: "LOOSE FIT BERMUDA SHORTS Desc", price: 80, quatity: 100, imageUrl: "top-selling/P3.png", rating: 3},
-    {id: "4", name: "FADED SKINNY JEANS", description: "FADED SKINNY JEANS Desc", price: 210, quatity: 100, imageUrl: "top-selling/P4.png", rating: 4.5}
+    {id: "4", name: "FADED SKINNY JEANS", description: "FADED SKINNY JEANS Desc", price: 210, quatity: 100, imageUrl: "top-selling/P4.png", rating: 4.5},
+    {id: "5", name: "Gradient Graphic T-shirt", description: "VERTICAL STRIPED SHIRT Desc", discountedPrice: 212, price: 232, quatity: 100, imageUrl: "top-selling/P1.png", rating: 5},
+    {id: "6", name: "Polo with Tipping Details", description: "COURAGE GRAPHIC T-SHIRT Desc", price: 145, quatity: 100, imageUrl: "top-selling/P2.png", rating: 4},
+    {id: "7", name: "LOOSE FIT BERMUDA SHORTS", description: "LOOSE FIT BERMUDA SHORTS Desc", price: 80, quatity: 100, imageUrl: "top-selling/P3.png", rating: 3},
+    {id: "8", name: "Black Striped T-shirt", description: "FADED SKINNY JEANS Desc", price: 210, quatity: 100, imageUrl: "top-selling/P4.png", rating: 4.5},
+    {id: "9", name: "LOOSE FIT BERMUDA SHORTS", description: "LOOSE FIT BERMUDA SHORTS Desc", price: 80, quatity: 100, imageUrl: "top-selling/P3.png", rating: 3},
+    {id: "10", name: "Black Striped T-shirt", description: "FADED SKINNY JEANS Desc", price: 210, quatity: 100, imageUrl: "top-selling/P4.png", rating: 4.5},
+    {id: "11", name: "LOOSE FIT BERMUDA SHORTS", description: "LOOSE FIT BERMUDA SHORTS Desc", price: 80, quatity: 100, imageUrl: "top-selling/P3.png", rating: 3},
+    {id: "12", name: "Black Striped T-shirt", description: "FADED SKINNY JEANS Desc", price: 210, quatity: 100, imageUrl: "top-selling/P4.png", rating: 4.5}
 ];
+
+export const CATEGORIES_LIST = [{id: 1, name: 't-shirts'}, {id: 2, name: 'shorts'}, {id: 3, name: 'shirts'}, {id: 4, name: 'hoodie'}, {id: 5, name: 'jeans'}]
 
 export const REVIEWS_LIST: Review[] = [
     {
