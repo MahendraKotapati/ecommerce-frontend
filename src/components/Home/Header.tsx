@@ -7,13 +7,13 @@ export const Header = () => {
     const navigation = ["Shop", "On Sale", "New Arrivals", "Brands"];
     const router = useRouter();
 
-    const goToHome = () => {
-      router.push('/');
-    };
+    const goToPage = (url: string) => {
+        router.push(url);
+    }
 
     return (
         <div className={styles.header_container}>
-            <div className={styles.brand + " cursor-pointer"} onClick={goToHome}>{BRAND_NAME}</div>
+            <div className={styles.brand + " cursor-pointer"} onClick={() => goToPage("/")}>{BRAND_NAME}</div>
             <div className={styles.nav_container}>
                 {
                     navigation.map((navTitle) => {
@@ -31,8 +31,8 @@ export const Header = () => {
             </div>
             
             <div className="flex items-center gap-3 ml-auto">
-                <img width={24} height={24} src="./cart.svg"></img>
-                <img width={24} height={24} src="./profile.svg"></img>
+                <img className="cursor-pointer" width={24} height={24} src="./cart.svg" onClick={() => goToPage('/cart')}></img>
+                <img className="cursor-pointer" width={24} height={24} src="./profile.svg"></img>
             </div>
         </div>
     )

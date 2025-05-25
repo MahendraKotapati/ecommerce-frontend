@@ -19,7 +19,7 @@ export const QuantityButton = (props: Props) => {
 
     return (
         <>
-            <div className={` ${quantity == 0 ? 'hidden' : ''} flex-1 flex items-center rounded-full justify-between bg-border py-1.5 px-3`}> 
+            <div className={` ${quantity == 0 ? 'hidden' : ''} flex-1 flex items-center rounded-full justify-between bg-border py-1.5 px-3 ${customStyles}`}> 
                 <FaMinus className="h-5 w-5 cursor-pointer" onClick={() => updateQuantity(-1)} />
                 <div>{quantity}</div>
                 <FaPlus className="h-5 w-5 cursor-pointer" onClick={() => updateQuantity(1)} />

@@ -1,4 +1,5 @@
 import { Review } from "@/components/ReviewCard";
+import { Cart } from "@/models/Cart";
 
 export const DYNAMIC_SECTIONS_DATA = [
     {   
@@ -76,3 +77,13 @@ export const REVIEWS_LIST: Review[] = [
         rating: 2
     }
 ];
+
+export const DATA_CART: Cart = {
+    id: "112",
+    createdOn: "2025-05-25",
+    items: [
+        {id: "1", productName: "VERTICAL STRIPED SHIRT", price: 212, sizeVariant: 'Small', colorvarinat: 'red', imageUrl: "top-selling/P1.png", quantity: 1 },
+        {id: "2", productName: "FADED SKINNY JEANS", price: 210, sizeVariant: 'Medium', colorvarinat: 'yellow', imageUrl: "top-selling/P4.png", quantity: 1  },
+        {id: "3", productName: "LOOSE FIT BERMUDA SHORTS", price: 80, sizeVariant: 'Small', colorvarinat: 'black', imageUrl: "top-selling/P3.png", quantity: 1  }
+    ]
+}
