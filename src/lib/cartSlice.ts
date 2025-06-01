@@ -2,29 +2,45 @@ import { createSlice } from '@reduxjs/toolkit';
 
 
 export interface CartState {
-    count: number;
+    id: string;
+    createdOn: string;
+    items: CartItem[];
+}
+
+export interface CartItem {
+    id: string;
+    productName: string;
+    price: number;
+    sizeVariant: string;
+    colorvarinat: string;
+    imageUrl: string;
+    quantity: number;
 }
 
 const carInitailState: CartState = {
-    count: 0
+    id: '',
+    createdOn: '',
+    items: []
 }
 
 export const cartSlice = createSlice({
   name: 'cart',
   initialState: carInitailState,
   reducers: {
-    increment: (state) => {
-      state.count += 1;
+    addToCart: (state, action) => {
+      state.items.push(action.payload);
     },
-    decrement: (state) => {
-      state.count -= 1;
+    updateQuatity: (state, action) => {
+      const idx = state.items.findIndex(a => a.id == action.payload.id);
+      state.items[idx].quantity = action.payload.quantity;
     },
-    incrementByAmount: (state, action) => {
-      state.count += action.payload;
-    },
+    removeItem: (state, action) => {
+      const idx = state.items.findIndex(a => a.id == action.payload.id);
+      state.items.splice(idx, 1);
+    }
   },
 });
 
-export const { increment, decrement, incrementByAmount } = cartSlice.actions;
+export const { addToCart, updateQuatity, removeItem } = cartSlice.actions;
 
 export default cartSlice.reducer;

@@ -1,12 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector, useStore } from 'react-redux';
-import cartReducer from './cartSlice';
+import cartReducer, { CartState } from './cartSlice';
 
 
 export interface Store {
-    cart: {
-        count: number;
-    }
+    cart: CartState
 }
 
 export const makeStore = () => {

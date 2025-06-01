@@ -11,7 +11,7 @@ const FOOTER_LINKS = [
     {title: "Help", links: ["Customer Support", "Delivery Details", "Terms & Conditions", "Policy"]},
     {title: "FAQ", links: ["Account", "Manage Deliveries", "Orders", "Payments"]}
 ];
-const PAYMENTS_ACCEPTED = ["./visa.svg", "./mastercard.svg", "./paypal.svg", "./apple-pay.svg"];
+const PAYMENTS_ACCEPTED = ["/visa.svg", "/mastercard.svg", "/paypal.svg", "/apple-pay.svg"];
 
 export const Footer = () => {
     return (

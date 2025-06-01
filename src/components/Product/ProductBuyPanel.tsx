@@ -6,6 +6,9 @@ import { FaStar } from "react-icons/fa6";
 import { FaStarHalf } from "react-icons/fa6";
 import { FaCheck } from "react-icons/fa6";
 import { QuantityButton } from "../QuantityButton";
+import { Store } from "@/lib/store";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, CartItem, removeItem, updateQuatity } from "@/lib/cartSlice";
 
 const TEMP_PRODUCT_IMAGES = ["/productP1.jpeg", "/productP3.png", "/productP2.png"];
 
@@ -15,7 +18,7 @@ interface Props {
 
 export const ProductBuyPanel = (props: Props) => {
 
-    const {name, description, price, discountedPrice, rating, variants} = {...props.product};
+    const {id, name, description, price, discountedPrice, rating, variants} = {...props.product};
     
     const roundedRating = ((rating ?? 0) * 2) / 2;
     const hasHalfStar = roundedRating != Math.floor(roundedRating);
@@ -30,7 +33,10 @@ export const ProductBuyPanel = (props: Props) => {
     const [productImages, setProductImages] = useState<string[]>([]);
     const [selectedImage, setSelectedImage] = useState("");
 
-    const [quantity, setQuantity] = useState(0);
+    const cartItems = useSelector((state: Store) => state.cart.items);
+    const dispatch = useDispatch();
+
+    const [quantity, setQuantity] = useState(cartItems.find(item => item.id == id)?.quantity || 0);
 
     const colorBgMap: {[color: string] : string} = {};
     colors.map((color) => {
@@ -46,8 +52,30 @@ export const ProductBuyPanel = (props: Props) => {
     const addToCartHandler = () => {
         if (quantity > 0)
             return ;
-        else 
+        else {
+            const cartItem: CartItem = {
+                id,
+                productName: name,
+                price: discountedPrice ? discountedPrice : price,
+                sizeVariant: selectedSize,
+                colorvarinat: selectedColor,
+                imageUrl: variants?.colorVariants.find((v) => v.color == selectedColor)?.images[0] || '',
+                quantity: 1
+            }
+            dispatch(addToCart(cartItem)); 
             setQuantity(1);
+        }
+    }
+
+    const updateQuantityHandler = (change: number, productId: string) => {
+        if (quantity + change <= 0) {
+            dispatch(removeItem({id}));
+            setQuantity((quantity: number) => quantity + change);
+            return ;
+        }
+
+        dispatch(updateQuatity({id, quantity: quantity + change})); 
+        setQuantity((quantity: number) => quantity + change);
     }
 
     return (
@@ -153,7 +181,7 @@ export const ProductBuyPanel = (props: Props) => {
 
                     <hr className="border-border my-1"/>
                     <div className="flex gap-1.5 justify-center">
-                        <QuantityButton quantity={quantity} setQuantity={setQuantity} customStyles="w-[150px] w-1/4" />
+                        <QuantityButton quantity={quantity} productId={id} updateQuantity={updateQuantityHandler} customStyles="w-[150px] w-1/4" />
                         <Button className="rounded-full w-3/4 h-[44px] cursor-pointer bg-brand hover:bg-brand" onClick={addToCartHandler}> Add to Cart </Button>
                     </div>
                 </div>

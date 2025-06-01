@@ -1,5 +1,5 @@
 import { Review } from "@/components/ReviewCard";
-import { Cart } from "@/models/Cart";
+import { CartState } from "@/lib/cartSlice";
 import { Product } from "@/models/Product";
 
 export const DYNAMIC_SECTIONS_DATA = [
@@ -139,9 +139,6 @@ export const PRODUCTS_LIST: Product[] = [
 ];
 
 
-
-
-
 export const CATEGORIES_LIST = [{id: 1, name: 't-shirts'}, {id: 2, name: 'shorts'}, {id: 3, name: 'shirts'}, {id: 4, name: 'hoodie'}, {id: 5, name: 'jeans'}]
 
 export const REVIEWS_LIST: Review[] = [
@@ -182,7 +179,7 @@ export const REVIEWS_LIST: Review[] = [
     }
 ];
 
-export const DATA_CART: Cart = {
+export const DATA_CART: CartState = {
     id: "112",
     createdOn: "2025-05-25",
     items: [
