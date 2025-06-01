@@ -1,12 +1,13 @@
 import { Product } from "@/models/Product";
 import { Button } from "@/utils/components-shadcn/ui/button";
 import { SecondaryText } from "@/utils/Typography";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa6";
 import { FaStarHalf } from "react-icons/fa6";
 import { FaCheck } from "react-icons/fa6";
 import { QuantityButton } from "../QuantityButton";
 
+const TEMP_PRODUCT_IMAGES = ["/productP1.jpeg", "/productP3.png", "/productP2.png"];
 
 interface Props {
     product: Product;
@@ -14,24 +15,33 @@ interface Props {
 
 export const ProductBuyPanel = (props: Props) => {
 
-    const {price, discountedPrice, rating} = {...props.product};
-
+    const {name, description, price, discountedPrice, rating, variants} = {...props.product};
+    
     const roundedRating = ((rating ?? 0) * 2) / 2;
     const hasHalfStar = roundedRating != Math.floor(roundedRating);
     const discountPercentage = Math.floor((((discountedPrice || 0) - price) / price)*100);
-    const colorsVariants = ["darkred", "green", "black"];
-    const sizeVariants = ["small", "medium", "large", "x-large"];
-    const [selectedColor, setSelectedColor] = useState(colorsVariants[0]);
-    const productImages = ["/productP1.jpeg", "/productP3.png", "/productP2.png"]; // /productP1.jpeg
-    const [selectedImage, setSelectedImage] = useState(productImages[0]);
+
+    const colors = (variants?.colorVariants || []).map(v => v.color) || [];
+    const [selectedColor, setSelectedColor] = useState(colors[0]);
+
+    const sizes = variants?.sizeVariants || [];
+    const [selectedSize, setSelectedSize] = useState(sizes[1]);
+
+    const [productImages, setProductImages] = useState<string[]>([]);
+    const [selectedImage, setSelectedImage] = useState("");
+
     const [quantity, setQuantity] = useState(0);
 
     const colorBgMap: {[color: string] : string} = {};
-    colorsVariants.map((color) => {
+    colors.map((color) => {
         colorBgMap[color] = `bg-${color}-700`;
     });
 
-    const [selectedSize, setSelectedSize] = useState(sizeVariants[1]);
+    useEffect(() => {
+        const productImages = variants?.colorVariants.find((v) => v.color == selectedColor)?.images || TEMP_PRODUCT_IMAGES;
+        setProductImages(productImages);
+        setSelectedImage(productImages[0]);
+    }, [selectedColor]);
 
     const addToCartHandler = () => {
         if (quantity > 0)
@@ -60,12 +70,12 @@ export const ProductBuyPanel = (props: Props) => {
                         }
                     </div>
                     <div className="relative w-[444px] h-[500px] "> 
-                        <img src={selectedImage} className="bg-border border border-border rounded-[20px] absolute inset-0 w-full h-full" /> 
+                        <img src={selectedImage} className="w-full h-full bg-border border border-border rounded-[20px] absolute inset-0 object-cover" /> 
                     </div>
                 </div>
 
                 <div className="flex-1 flex flex-col gap-3 w-full">
-                    <div className="text-4xl uppercase"> One Life Graphic T-shirt </div>
+                    <div className="text-4xl uppercase"> {name} </div>
 
                     <div className="flex items-center">
                         <div className="flex gap-1 my-1">
@@ -94,8 +104,7 @@ export const ProductBuyPanel = (props: Props) => {
                     </div>
 
                     <SecondaryText> 
-                        This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style. 
-                        This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style. 
+                        {description}
                     </SecondaryText>
 
                     <hr className="border-border my-1" />
@@ -128,7 +137,7 @@ export const ProductBuyPanel = (props: Props) => {
                         <SecondaryText> Choose Size </SecondaryText>
                         <div className="flex gap-2 mt-3 flex-wrap">
                             {
-                                sizeVariants.map((size) => {
+                                sizes.map((size) => {
                                     return (
                                         <Button 
                                             onClick={() => setSelectedSize(size)}

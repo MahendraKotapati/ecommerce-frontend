@@ -1,14 +1,15 @@
 import { Product } from "@/models/Product";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Footer } from "../Footer";
 import { ReviewList } from "./ReviewLis";
 import { Section } from "../Home/Section";
 import { PRODUCTS_LIST } from "@/utils/Constant";
 import { ProductBuyPanel } from "./ProductBuyPanel";
 import { Header } from "../Home/Header";
+import { ProductService } from "@/services/product.service";
+import { useRouter } from "next/router";
 
 interface Props {
-    id: string;
 }
 
 enum TAB {
@@ -21,18 +22,26 @@ const TAB_LIST = Object.values(TAB);
 
 export const ProductDetail = (props: Props) => {
 
-    const [product, setProduct] = useState<Product>({rating: 4, price: 300, discountedPrice: 150} as Product);
+    const [product, setProduct] = useState<Product>({} as Product);
     const [selectedTab, setSelectedTab] = useState(TAB.REVIEWS);
     const [suggestedProducts, setSuggestedProducts] = useState<Product[]>(PRODUCTS_LIST.slice(0, 4));
+    const [isLoading, setLoading] = useState(true);
+    const router = useRouter();
+    const id = router.query.id as string;
+
+    const productService = new ProductService();
 
     useEffect(() => {
-
-    }, [props.id]);
+        setLoading(true);
+        const p = productService.getProduct(id);
+        setProduct(p);
+        setLoading(false);
+    }, [id]);
 
     return (
         <>  
             <Header />
-            <ProductBuyPanel product={product}/>
+            {!isLoading && <ProductBuyPanel product={product}/>}
 
             <div className="mx-[108px]"> 
                 <div className="flex w-full text-center"> 

@@ -4,7 +4,11 @@ export interface Product {
     description: string;
     price: number;
     discountedPrice?: number;
-    quatity: number;
-    imageUrl: string;
+    quantity: number;
     rating?: number;
+
+    variants?: {
+        colorVariants: { color: string, images: string[] }[];
+        sizeVariants: string[];
+    };
 }
