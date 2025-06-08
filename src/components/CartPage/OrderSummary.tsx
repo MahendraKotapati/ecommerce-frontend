@@ -1,17 +1,21 @@
 import { Store } from "@/lib/store";
 import { Button } from "@/utils/components-shadcn/ui/button";
 import { Title } from "@/utils/Typography";
+import { useRouter } from "next/router";
 import { FaTag, FaArrowRightLong } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 
-const DELIVERY_FEE = 20;
-
 export const OrderSummary = () => {
     const cartItems = useSelector((state: Store) => state.cart.items);
+    const router = useRouter();
     
     const subTotal = cartItems.reduce((accumulator, item) => accumulator + (item.price * item.quantity), 0);
     const discountPercentate = 10;
-    const total = (subTotal-((discountPercentate/100) * subTotal)+DELIVERY_FEE).toFixed(2);
+    const estimatedTotal = (subTotal-((discountPercentate/100) * subTotal)).toFixed(2);
+
+    const goToPage = (url: string) => {
+        router.push(url);
+    }
 
     return (
         <div className="border border-border rounded-[20px] py-5 px-6 h-fit w-[500px]">
@@ -27,15 +31,15 @@ export const OrderSummary = () => {
                 </div>
                 <div className="flex justify-between">
                         <p className="text-base text-secondary"> Delivery Fee </p>
-                        <p className="text-base font-medium"> {"$"+ DELIVERY_FEE} </p>
+                        <p className="text-sm font-light italic "> Calculated at Checkout </p>
                 </div>
            </div>
 
            <hr className="my-4" />
 
            <div className="flex justify-between">
-                <p className="text-xl"> Total </p>
-                <p className="text-xl font-semibold"> {"$"+ total} </p>
+                <p className="text-xl"> Estimated total </p>
+                <p className="text-xl font-semibold"> {"$"+ estimatedTotal} </p>
             </div>
 
             <div className="flex gap-3 my-5">
@@ -50,7 +54,7 @@ export const OrderSummary = () => {
                 <Button className="w-1/4 rounded-full h-[44px] cursor-pointer bg-brand hover:bg-brand" onClick={()=> {}}> Apply </Button>
             </div>
             
-            <Button className="text-base w-full rounded-full h-[54px] cursor-pointer bg-brand hover:bg-brand" onClick={()=> {}}> 
+            <Button className="text-base w-full rounded-full h-[54px] cursor-pointer bg-brand hover:bg-brand" onClick={() => goToPage('/checkout')}> 
                 Go to Checkout 
                 <span className="ml-1"> <FaArrowRightLong className="!h-5 !w-5" /> </span>
             </Button>

@@ -7,34 +7,41 @@ import { IoSearch } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { Store } from "@/lib/store";
 
-export const Header = () => {
+interface Props {
+    basicHeader?: boolean;
+    customStyles?: string;
+}
+
+export const Header = (props: Props) => {
 
     const navigation = ["Shop", "On Sale", "New Arrivals", "Brands"];
     const router = useRouter();
     const cartItems = useSelector((state: Store) => state.cart.items);
+
 
     const goToPage = (url: string) => {
         router.push(url);
     }
 
     return (
-        <div className={styles.header_container}>
+        <div className={styles.header_container + ` ${props.customStyles}`}>
             <div className={styles.brand + " cursor-pointer"} onClick={() => goToPage("/")}>{BRAND_NAME}</div>
-            <div className={styles.nav_container}>
+            {!props.basicHeader && <div className={styles.nav_container}>
                 {
                     navigation.map((navTitle) => {
                         return <div key={navTitle} className={styles.nav_title}> {navTitle} </div>;
                     })
                 }
-            </div>
-            <div className="flex items-center bg-gray-100 rounded-full w-[577px] p-2 px-4">
+            </div>}
+
+            {!props.basicHeader && <div className="flex items-center bg-gray-100 rounded-full w-[577px] p-2 px-4">
                  <IoSearch className="h-6 w-6 text-black opacity-40" />
                 <input
                     type="text"
                     placeholder="Search for products..."
                     className="bg-transparent outline-none ml-2 text-gray-600 w-full"
                 />
-            </div>
+            </div>}
             
             <div className="flex items-center gap-3 ml-auto">
                 <div className="cursor-pointer"> <FaCircleUser className="h-5.5 w-5.5" /> </div>

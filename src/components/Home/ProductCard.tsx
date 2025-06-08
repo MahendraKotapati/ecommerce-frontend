@@ -21,10 +21,12 @@ export const ProductCard = (props: Props) => {
     const goToProduct = () => {
         router.push(`/product/${id}`);
     };
-
+    // 
     return (
     <div className="cursor-pointer" onClick={goToProduct}>
-        <img src={images[0]} className={`w-[295px] h-[295px] rounded-[20px] ${props.customStyles}`}></img>
+        {images.length > 0 && <img src={images[0]} className={`w-[295px] h-[295px] rounded-[20px] ${props.customStyles}`} />}
+        {images.length == 0 && <img src={"https://placehold.co/1024x1024?text=Image%20Coming%20Soon"} className={`w-[295px] h-[295px] rounded-[20px] ${props.customStyles}`} /> }
+
         <p className="text-[18px] mt-4 capitalize font-semibold">
             {name.toLowerCase()}
         </p>
