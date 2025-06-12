@@ -57,9 +57,9 @@ export const ProductDetail = (props: Props) => {
                         })
                     }
                 </div>
-                {selectedTab == TAB.PRODUCT_DETAILS &&  <div> Product Details here </div>}
+                {selectedTab == TAB.PRODUCT_DETAILS &&  <div className="mt-3"> Product Details here </div>}
                 {selectedTab == TAB.REVIEWS &&  <ReviewList></ReviewList>}
-                {selectedTab == TAB.FAQS &&  <div> FAQs here </div>}
+                {selectedTab == TAB.FAQS &&  <div className="mt-3"> FAQs here </div>}
             </div>
 
             <Section 

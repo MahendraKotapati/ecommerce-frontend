@@ -5,13 +5,13 @@ import { Section } from "./Section";
 import { DressStyleGrid } from "./DressStyleGrid";
 import { Footer } from "../Footer";
 import { ReviewList } from "./ReviewList";
-import { DYNAMIC_SECTIONS_DATA } from "@/utils/Constant";
+import { DYNAMIC_SECTIONS_DATA, SPECIAL_FILTERS } from "@/utils/Constant";
 
-export const BRAND_NAME = "SPEND";
+export const BRAND_NAME = "FitIn";
 
 export const Home = () => {
 
-    const dynamicSections: {title: string, products: Product[] }[] = DYNAMIC_SECTIONS_DATA;
+    const dynamicSections: {title: string, filterName: SPECIAL_FILTERS, products: Product[] }[] = DYNAMIC_SECTIONS_DATA;
 
     return (
         <>

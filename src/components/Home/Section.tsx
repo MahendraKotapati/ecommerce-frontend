@@ -1,16 +1,26 @@
 import { Product } from "@/models/Product";
 import { ProductCard } from "./ProductCard";
 import styles from "./Section.module.css";
+import { Button } from "@/utils/components-shadcn/ui/button";
+import { useRouter } from "next/router";
+import { SPECIAL_FILTERS } from "@/utils/Constant";
 
 interface Props {
     isLast: boolean;
     hideViewAllBtn?: boolean;
-    sectionData: {title: string, products: Product[]};
+    sectionData: {title: string, filterName: SPECIAL_FILTERS, products: Product[]};
     customStyles?: string;
 }
 
 export const Section = (props: Props) => {
     const {sectionData} = {...props};
+
+    const router = useRouter();
+    
+    const goToPage = (url: string) => {
+        router.push(url);
+    };
+
     return (
         <div className={`mt-16 mx-[110px] flex flex-col items-center ${props.customStyles}`}>
             <div className={"mb-8 uppercase " + styles.title}> {sectionData.title} </div>
@@ -20,9 +30,11 @@ export const Section = (props: Props) => {
                 })}
             </div>
             {!props.hideViewAllBtn &&
-                <div className="mt-8 mb-12 border border-border rounded-full py-4 px-12 w-52 flex justify-center cursor-pointer"> 
-                        View All 
-                </div>
+                <Button 
+                    onClick={() => goToPage(`/category/-1?filter=${sectionData.filterName}`)}
+                    className="mt-8 mb-12 py-4 px-12 border border-brand text-black rounded-full bg-white h-12 w-52 hover:bg-brand hover:text-white cursor-pointer" variant={"outline"}> 
+                    View All 
+                </Button>
             }
             {!props.isLast && <hr className="border-border w-[100%]" />}
         </div>

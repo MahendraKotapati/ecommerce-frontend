@@ -9,8 +9,7 @@ import { QuantityButton } from "../QuantityButton";
 import { Store } from "@/lib/store";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, CartItem, removeItem, updateQuatity } from "@/lib/cartSlice";
-
-const TEMP_PRODUCT_IMAGES = ["/productP1.jpeg", "/productP3.png", "/productP2.png"];
+import { NO_IMAGE_URL, TEMP_PRODUCT_IMAGES } from "@/utils/Constant";
 
 interface Props {
     product: Product;
@@ -31,7 +30,9 @@ export const ProductBuyPanel = (props: Props) => {
     const [selectedSize, setSelectedSize] = useState(sizes[1]);
 
     const [productImages, setProductImages] = useState<string[]>([]);
-    const [selectedImage, setSelectedImage] = useState("");
+
+    const [selectedImageIdx, setSelectedImageIdx] = useState(0);
+
 
     const cartItems = useSelector((state: Store) => state.cart.items);
     const dispatch = useDispatch();
@@ -44,10 +45,17 @@ export const ProductBuyPanel = (props: Props) => {
     });
 
     useEffect(() => {
-        const productImages = variants?.colorVariants.find((v) => v.color == selectedColor)?.images || TEMP_PRODUCT_IMAGES;
+        let productImages = variants?.colorVariants.find((v) => v.color == selectedColor)?.images;
+        if (!productImages || productImages?.length == 0) {
+            productImages = TEMP_PRODUCT_IMAGES;
+        }
         setProductImages(productImages);
-        setSelectedImage(productImages[0]);
+        setSelectedImageIdx(0);
     }, [selectedColor]);
+
+    useEffect(() => {
+        setSelectedColor(colors[0]);
+    }, [id])
 
     const addToCartHandler = () => {
         if (quantity > 0)
@@ -85,12 +93,14 @@ export const ProductBuyPanel = (props: Props) => {
                 <div className="flex-1 flex gap-4">
                     <div className="w-[150px] h-[500px] flex flex-col gap-4">
                         {
-                            productImages.slice(0, 3).map((imageUrl) => {
+                            productImages.slice(0, 3).map((imageUrl, index) => {
                                 return (
-                                    <div className="relative flex-1 flex">
+                                    <div className="relative flex-1 flex cursor-pointer">
                                         <img src={imageUrl} 
-                                            onClick={() => setSelectedImage(imageUrl)} 
-                                            className={`absolute inset-0 w-full h-full rounded-[20px] ${(imageUrl == selectedImage) ? " border-2 border-brand" : "border border-border"}`}>    
+                                            onClick={() => setSelectedImageIdx(index)} 
+                                            className={`absolute inset-0 w-full h-full rounded-[20px] 
+                                                ${imageUrl == NO_IMAGE_URL ? ' object-cover' : ' '}  
+                                                 ${(index == selectedImageIdx) ? " border-2 border-brand" : " border border-border"}`}>    
                                         </img>
                                     </div>
                                 );
@@ -98,7 +108,10 @@ export const ProductBuyPanel = (props: Props) => {
                         }
                     </div>
                     <div className="relative w-[444px] h-[500px] "> 
-                        <img src={selectedImage} className="w-full h-full bg-border border border-border rounded-[20px] absolute inset-0 object-cover" /> 
+                        <img src={productImages[selectedImageIdx]} 
+                            className={`w-full h-full bg-border border border-border rounded-[20px] absolute inset-0 object-cover 
+                                ${productImages[selectedImageIdx] == NO_IMAGE_URL ? ' ' : ' transform transition-transform duration-300 hover:scale-105 '}`} 
+                        /> 
                     </div>
                 </div>
 

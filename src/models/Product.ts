@@ -11,4 +11,7 @@ export interface Product {
         colorVariants: { color: string, images: string[] }[];
         sizeVariants: string[];
     };
+
+    categoryId: number;
+    isNew?: boolean;
 }

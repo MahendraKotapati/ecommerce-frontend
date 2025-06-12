@@ -3,6 +3,7 @@ import styles from "./productCard.module.css";
 import { FaStar } from "react-icons/fa6";
 import { FaStarHalf } from "react-icons/fa6";
 import { useRouter } from "next/router";
+import { NO_IMAGE_URL } from "@/utils/Constant";
 
 interface Props {
     product: Product;
@@ -14,18 +15,18 @@ export const ProductCard = (props: Props) => {
     const roundedRating = ((rating ?? 0) * 2) / 2;
     const hasHalfStar = roundedRating != Math.floor(roundedRating);
     const discountPercentage = Math.floor((((discountedPrice || 0) - price) / price)*100);
-    const images: string[] = []; // read it from colorvariants.images
+    const images: string[] =  variants?.colorVariants[0]?.images || [];
 
     const router = useRouter();
     
     const goToProduct = () => {
         router.push(`/product/${id}`);
     };
-    // 
+    
     return (
     <div className="cursor-pointer" onClick={goToProduct}>
-        {images.length > 0 && <img src={images[0]} className={`w-[295px] h-[295px] rounded-[20px] ${props.customStyles}`} />}
-        {images.length == 0 && <img src={"https://placehold.co/1024x1024?text=Image%20Coming%20Soon"} className={`w-[295px] h-[295px] rounded-[20px] ${props.customStyles}`} /> }
+        {images.length > 0 && <img src={images[0]} className={`w-[295px] h-[295px] rounded-[20px] transform transition-transform duration-300 hover:scale-105 ${props.customStyles}`} />}
+        {images.length == 0 && <img src={NO_IMAGE_URL} className={`w-[295px] h-[295px] rounded-[20px] ${props.customStyles}`} /> }
 
         <p className="text-[18px] mt-4 capitalize font-semibold">
             {name.toLowerCase()}

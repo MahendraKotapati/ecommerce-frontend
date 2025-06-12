@@ -1,5 +1,5 @@
-import { Category } from "@/components/Category/Category";
+import { CategoryPage } from "@/components/Category/CategoryPage";
 
 export default  function C() {
-  return (<Category id={"1"}></Category>);
+  return (<CategoryPage></CategoryPage>);
 }

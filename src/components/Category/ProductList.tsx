@@ -22,6 +22,10 @@ export const ProductList = (props: Props) => {
         setCurrentProducts(products.slice(page*PAGE_SIZE, page*PAGE_SIZE+PAGE_SIZE));
     }, [page]);
 
+    useEffect(() => {
+        setCurrentProducts(products.slice(page*PAGE_SIZE, page*PAGE_SIZE+PAGE_SIZE));
+    }, [products]);
+
     const updatePageSize = (change: number) => {
         if ((page + change < 0) || (page + change >= Math.ceil(products.length/PAGE_SIZE)))
             return ;
@@ -32,7 +36,7 @@ export const ProductList = (props: Props) => {
         <div className="flex flex-col justify-between">
             <div className="flex flex-col"> 
                 <div className="flex justify-between mb-2">
-                    <p className="text-3xl font-semibold"> {title} </p>
+                    <p className="text-3xl font-semibold capitalize"> {title} </p>
                     <div className="flex gap-2"> 
                         <SecondaryText> Showing {page*PAGE_SIZE+1 + "-" + (Math.min(page*PAGE_SIZE+PAGE_SIZE, products.length))} of {products.length} Products  </SecondaryText>
                         <div> Sort by: Most Popular </div>
