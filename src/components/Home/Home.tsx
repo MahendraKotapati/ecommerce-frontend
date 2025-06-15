@@ -5,13 +5,26 @@ import { Section } from "./Section";
 import { DressStyleGrid } from "./DressStyleGrid";
 import { Footer } from "../Footer";
 import { ReviewList } from "./ReviewList";
-import { DYNAMIC_SECTIONS_DATA, SPECIAL_FILTERS } from "@/utils/Constant";
+import { SPECIAL_FILTERS } from "@/utils/Constant";
+import { useEffect, useState } from "react";
+import { ProductService } from "@/services/product.service";
 
 export const BRAND_NAME = "FitIn";
 
-export const Home = () => {
+export interface SectionModel {
+    title: string, 
+    filterName?: SPECIAL_FILTERS, 
+    products: Product[]
+}
 
-    const dynamicSections: {title: string, filterName: SPECIAL_FILTERS, products: Product[] }[] = DYNAMIC_SECTIONS_DATA;
+export const Home = () => {
+    const [dynamicSections, setDynamicSections] = useState<SectionModel[]>([]);
+    const productService = new ProductService();
+
+    useEffect(() => {
+        const dynamicSections = productService.getDynamicSections();
+        setDynamicSections(dynamicSections);
+    }, []);
 
     return (
         <>

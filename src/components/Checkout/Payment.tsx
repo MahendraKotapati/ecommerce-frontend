@@ -5,10 +5,13 @@ import { Checkbox } from "@/utils/components-shadcn/ui/checkbox";
 import { useState } from "react";
 
 interface Props {
+    billingAddress: Address;
     addressDispatch: any;
     billingAddressErrors: AddressErrors;
 
     paymentInfoErrors: PaymentInfoErrors;
+
+    paymentInfo: PaymentInfo;
     paymentInfoDispatch: any;
 
     showBillingAddress: boolean;
@@ -30,10 +33,32 @@ export interface PaymentInfo {
 }
 
 export const Payment  = (props: Props) => {
-    const {paymentInfoDispatch, paymentInfoErrors, showBillingAddress, handleBillingAddressCheckbox} = {...props};
+    const {paymentInfo, paymentInfoDispatch, paymentInfoErrors, showBillingAddress, handleBillingAddressCheckbox, billingAddress} = {...props};
 
     const inputChangeHandler = (type: string, data: string) => {
-        props.paymentInfoDispatch({type, data });
+
+        let updatedData = data.trim();
+        if (type == 'cardNumber') {
+            updatedData = updatedData.replace(/\D/g, ""); // keep only digits;
+            if (updatedData.length > 16) {
+                return;
+            }
+            updatedData = updatedData.replace(/(.{4})/g, "$1 ").trim(); // add space for 4 numbers
+        } else if (type == 'expiryDate') {
+            updatedData = updatedData.replace(/\D/g, ""); // keep only digits;
+            if (updatedData.length > 4) {
+                return;
+            }
+            updatedData = (updatedData.length > 2) ?  `${updatedData.slice(0, 2)}/${updatedData.slice(2, 4)}` : updatedData;
+        } else if (type == 'secretCode') {
+            updatedData = updatedData.replace(/\D/g, "");
+             
+            if (updatedData.length > 4) {
+                return ;
+            }
+        }
+
+        props.paymentInfoDispatch({type, data: updatedData });
     }
 
     return (
@@ -41,19 +66,22 @@ export const Payment  = (props: Props) => {
             <p className="text-2xl font-semibold"> Payment </p>
             <div>
                 <Label htmlFor="CardNumber" className="mb-1.5">Card Number</Label>
-                <Input type="text" id="CardNumber" onChange={(e) => inputChangeHandler('cardNumber', e.target.value)} placeholder="Card Number" className={inputStyles(paymentInfoErrors.cardNumber)} />
+                <Input type="text" id="CardNumber" 
+                        value={paymentInfo.cardNumber}
+                        onChange={(e) => inputChangeHandler('cardNumber', e.target.value)} placeholder="Card Number" className={inputStyles(paymentInfoErrors.cardNumber)} 
+                />
                 {paymentInfoErrors.cardNumber && <p className={errorStyles}>Card Number is Invalid </p>}
             </div>
 
             <div className="flex gap-3">
                 <div>
                     <Label htmlFor="Expiry" className="mb-1.5">Expiry Date (MM/YY)</Label>
-                    <Input type="text" id="Expiry" onChange={(e) => inputChangeHandler('expiryDate', e.target.value)} placeholder="Expiry Date" className={inputStyles(paymentInfoErrors.expiryDate)} />
+                    <Input type="text" id="Expiry" value={paymentInfo.expiryDate} onChange={(e) => inputChangeHandler('expiryDate', e.target.value)} placeholder="Expiry Date" className={inputStyles(paymentInfoErrors.expiryDate)} />
                     {paymentInfoErrors.expiryDate && <p className={errorStyles}>Expiry Date is Invalid </p>}
                 </div>
                 <div>
                     <Label htmlFor="Security Code" className="mb-1.5">Security Code</Label>
-                    <Input type="password" id="SecurityCode" onChange={(e) => inputChangeHandler('secretCode', e.target.value)}  placeholder="Security Code" className={inputStyles(paymentInfoErrors.secretCode)} />
+                    <Input type="password" id="SecurityCode" value={paymentInfo.secretCode} onChange={(e) => inputChangeHandler('secretCode', e.target.value)}  placeholder="Security Code" className={inputStyles(paymentInfoErrors.secretCode)} />
                     {paymentInfoErrors.secretCode && <p className={errorStyles}>Security Code is Invalid </p>}
                 </div>
             </div>
@@ -71,6 +99,7 @@ export const Payment  = (props: Props) => {
             {showBillingAddress &&
                 <div className="mt-4 flex flex-col gap-4">  
                     <Address title="Billing address" 
+                        address={billingAddress}
                         addressDispatch={props.addressDispatch}
                         errors={props.billingAddressErrors}
                      /> 

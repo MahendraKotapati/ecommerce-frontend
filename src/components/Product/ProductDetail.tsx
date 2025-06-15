@@ -24,7 +24,7 @@ export const ProductDetail = (props: Props) => {
 
     const [product, setProduct] = useState<Product>({} as Product);
     const [selectedTab, setSelectedTab] = useState(TAB.REVIEWS);
-    const [suggestedProducts, setSuggestedProducts] = useState<Product[]>(PRODUCTS_LIST.slice(0, 4));
+    const [suggestedProducts, setSuggestedProducts] = useState<Product[]>([]);
     const [isLoading, setLoading] = useState(true);
     const router = useRouter();
     const id = router.query.id as string;
@@ -34,7 +34,14 @@ export const ProductDetail = (props: Props) => {
     useEffect(() => {
         setLoading(true);
         const p = productService.getProduct(id);
+        if (!p) 
+            return ;
         setProduct(p);
+
+        let suggestedProducts = productService.getProductsByCategory(p.categoryId);
+        suggestedProducts = suggestedProducts.filter(p => p.id != id);
+        setSuggestedProducts(suggestedProducts);
+
         setLoading(false);
     }, [id]);
 

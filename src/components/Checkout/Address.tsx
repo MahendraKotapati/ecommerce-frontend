@@ -16,6 +16,7 @@ export const errorStyles = "mt-1.5 ml-1.5 text-xs text-red-600";
 
 interface Props {
     title: string;
+    address: Address;
     addressDispatch: any;
     errors: AddressErrors;
 }
@@ -43,10 +44,16 @@ export type Address = {
 
 export const Address = (props: Props) => {
 
-    const {errors} = {...props};
+    const {address, errors} = {...props};
 
     const inputChangeHandler = (type: string, data: string) => {
-        props.addressDispatch({type, data });
+        let updatedData = data.trim();
+        if (type == 'zipCode') {
+            updatedData = updatedData.replace(/\D/g, ""); // keep only digits;
+            if (updatedData.length > 5)
+                return ;
+        }
+        props.addressDispatch({type, data: updatedData });
     }
 
     return (
@@ -55,32 +62,32 @@ export const Address = (props: Props) => {
             <div className="flex gap-3">
                 <div>
                     <Label htmlFor="FirstName" className="mb-1.5">First Name</Label>
-                    <Input type="text" id="FirstName" onChange={(e) => inputChangeHandler('firstName', e.target.value)} className={inputStyles(errors.firstName)} placeholder="First Name" />
+                    <Input type="text" id="FirstName" value={address.firstName} onChange={(e) => inputChangeHandler('firstName', e.target.value)} className={inputStyles(errors.firstName)} placeholder="First Name" />
                     {errors.firstName && <p className={errorStyles}>First Name is Invalid </p>}
                 </div>
                 <div>
                     <Label htmlFor="LastName" className="mb-1.5">Last Name</Label>
-                    <Input type="text" id="LastName" onChange={(e) => inputChangeHandler('lastName', e.target.value)} placeholder="Last Name" className={inputStyles(errors.lastName)} />
+                    <Input type="text" id="LastName" value={address.lastName} onChange={(e) => inputChangeHandler('lastName', e.target.value)} placeholder="Last Name" className={inputStyles(errors.lastName)} />
                     {errors.lastName && <p className={errorStyles}>Last Name is Invalid </p>}
                 </div>
             </div>
 
             <div>
                 <Label htmlFor="Country" className="mb-1.5">Country</Label>
-                <Input type="text" id="Country" placeholder="Country" value={"United States"} disabled={true} className={inputStyles(errors.country)} />
+                <Input type="text" id="Country" placeholder="Country" value={address.country} disabled={true} className={inputStyles(errors.country)} />
                 {errors.country && <p className={errorStyles}>Country is Invalid </p>}
             </div>
 
             <div>
                 <Label htmlFor="StreetAddress" className="mb-1.5">Street Address</Label>
-                <Input type="text" id="StreetAddress" onChange={(e) => inputChangeHandler('streetAddress', e.target.value)} placeholder="Street Address" className={inputStyles(errors.streetAddress)} />
+                <Input type="text" id="StreetAddress" value={address.streetAddress} onChange={(e) => inputChangeHandler('streetAddress', e.target.value)} placeholder="Street Address" className={inputStyles(errors.streetAddress)} />
                 {errors.streetAddress && <p className={errorStyles}>Street Address is Invalid </p>}
             </div>
 
             <div className="flex gap-3">
                 <div>
                     <Label htmlFor="City" className="mb-1.5">City</Label>
-                    <Input type="text" id="City" placeholder="City" onChange={(e) => inputChangeHandler('city', e.target.value)} className={inputStyles(errors.city)} />
+                    <Input type="text" id="City" value={address.city} placeholder="City" onChange={(e) => inputChangeHandler('city', e.target.value)} className={inputStyles(errors.city)} />
                     {errors.city && <p className={errorStyles}>City is Invalid </p>}
                 </div>
 
@@ -103,7 +110,9 @@ export const Address = (props: Props) => {
 
                 <div>
                     <Label htmlFor="ZipCode" className="mb-1.5">Zip Code</Label>
-                    <Input type="text" id="ZipCode" onChange={(e) => inputChangeHandler('zipCode', e.target.value)} placeholder="Zip Code"  className={inputStyles(errors.zipCode)} />
+                    <Input type="text" id="ZipCode"
+                     value={address.zipCode}
+                     onChange={(e) => inputChangeHandler('zipCode', e.target.value)} placeholder="Zip Code"  className={inputStyles(errors.zipCode)} />
                     {errors.zipCode && <p className={errorStyles}>Zip Code is Invalid </p>}
                 </div>
             </div>

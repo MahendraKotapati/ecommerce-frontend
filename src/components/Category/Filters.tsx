@@ -1,5 +1,5 @@
 import { CATEGORIES_LIST } from "@/utils/Constant";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FiSliders } from "react-icons/fi";
 import { FaChevronDown, FaChevronUp, FaChevronRight, FaCheck } from "react-icons/fa6";
 
@@ -8,23 +8,41 @@ import { Button } from "@/utils/components-shadcn/ui/button";
 import { useRouter } from "next/router";
 
 
-export const Filters = () => {
+export interface FilterOptions {
+    price: { min: number, max: number },
+    colors: string[],
+    sizes: string[]
+}
 
+interface Props {
+    filterOptions: FilterOptions,
+    setSelectedFilters: (filterOptions: FilterOptions) => void;
+    applyFilter: () => void;
+}
+
+export const Filters = (props: Props) => {
+
+    const {filterOptions, setSelectedFilters, applyFilter} = {...props};
     const [categories, setCategories] = useState(CATEGORIES_LIST);
-    const [price, setPrice] = useState([12, 88]);
+    const [price, setPrice] = useState<number[]>([filterOptions.price.min, filterOptions.price.max]);
     const [filtersOpenState, setFilterOpenState] = useState({price: true, color: true, size: true});
     const [selectedColors, setSelectedColors] = useState<string[]>([]);
-
-    const [sizeVariants, setSizeVariants] =  useState(["small", "medium", "large", "x-large"]);
     const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
     const router = useRouter();
 
     const colorBgMap: {[color: string] : string} = {};
-    const colorsVariants = ["darkred", "green", "black", "yellow", "violet", "orange"];
 
-    colorsVariants.map((color) => {
+    filterOptions.colors.map((color) => {
         colorBgMap[color] = `bg-${color}-700`;
     });
+
+    useEffect(() => {
+        setSelectedFilters({
+            price: {min: price[0], max: price[1]},
+            colors: selectedColors,
+            sizes: selectedSizes
+        });
+    }, [selectedColors, selectedSizes, price]);
 
 
     const toggleFilter = (filterName: string) => {
@@ -95,12 +113,12 @@ export const Filters = () => {
                {filtersOpenState.price && <div className="mt-6">
                     <Slider.Root
                         className="relative flex w-full touch-none select-none items-center"
-                        min={0}
-                        max={100}
+                        min={filterOptions.price.min}
+                        max={filterOptions.price.max}
                         step={1}
                         minStepsBetweenThumbs={1}
-                        value={price}
-                        onValueChange={(value) => setPrice(value)}
+                        value={[price[0], price[1]]}
+                        onValueChange={(value) => { setPrice(value); console.log('value: ', value);}}
                     >
                         <Slider.Track className="relative h-2 w-full grow overflow-hidden rounded-full bg-muted">
                             <Slider.Range className="absolute h-full bg-primary" />
@@ -131,7 +149,7 @@ export const Filters = () => {
                                     return (
                                         <div 
                                             key={color}
-                                            className={`relative h-9 w-9 rounded-full ${colorBgMap[color]} flex items-center justify-center border border-border cursor-pointer`}
+                                            className={`relative h-9 w-9 rounded-full flex items-center justify-center border border-border cursor-pointer`}
                                             style={{backgroundColor: color}}
                                             onClick={() => selectColor(color)}
                                         >
@@ -160,7 +178,7 @@ export const Filters = () => {
                     filtersOpenState.size &&
                         <div className="flex gap-3 mt-6 flex-wrap">
                             {
-                                sizeVariants.map((size) => {
+                                filterOptions.sizes.map((size) => {
                                     return (
                                         <Button 
                                             onClick={() => selectSize(size)}
@@ -176,7 +194,9 @@ export const Filters = () => {
                 }
             </div>
 
-            <Button className="w-full h-[44px] rounded-full mt-6 cursor-pointer bg-brand hover:bg-brand" onClick={() => {}}> Apply Filter </Button>
+            <Button className="w-full h-[44px] rounded-full mt-6 cursor-pointer bg-brand hover:bg-brand" onClick={applyFilter}> 
+                Apply Filter 
+            </Button>
 
         </div>
     );

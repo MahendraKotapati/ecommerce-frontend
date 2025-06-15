@@ -46,8 +46,9 @@ export const ProductBuyPanel = (props: Props) => {
 
     useEffect(() => {
         let productImages = variants?.colorVariants.find((v) => v.color == selectedColor)?.images;
-        if (!productImages || productImages?.length == 0) {
-            productImages = TEMP_PRODUCT_IMAGES;
+        if (!productImages || productImages?.length <3) {
+            productImages = [...(productImages || []), ...TEMP_PRODUCT_IMAGES];
+            productImages = productImages.slice(0, 3);
         }
         setProductImages(productImages);
         setSelectedImageIdx(0);

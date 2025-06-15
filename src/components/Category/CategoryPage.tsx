@@ -3,7 +3,7 @@ import { Footer } from "../Footer";
 import { Header } from "../Home/Header";
 import { ProductCard } from "../Home/ProductCard";
 import { DRESS_STYLE, PRODUCTS_LIST, SPECIAL_FILTERS } from "@/utils/Constant";
-import { Filters } from "./Filters";
+import { FilterOptions, Filters } from "./Filters";
 import { ProductList } from "./ProductList";
 import { useRouter } from "next/router";
 import { ProductService } from "@/services/product.service";
@@ -11,14 +11,25 @@ import { Product } from "@/models/Product";
 import { useSearchParams } from "next/navigation";
 import { Category } from "@/models/Category";
 
+
+const filtersInitialState: FilterOptions  = {
+    price: { min: 0, max: 0 },
+    colors: [],
+    sizes: []
+}
+
 interface Props {
 }
 
 export const CategoryPage = (props: Props) => {
 
     const [products, setProducts] = useState<Product[]>([]);
+    const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
     const [category, setcategory] = useState<Category>({} as Category);
     const [title, setTitle] = useState<string>("");
+    const [filterOptions, setFilterOptions] = useState(filtersInitialState);
+    const [selectedFilters, setSelectedFilters] = useState(filtersInitialState);
+    const [isLoading, setLoading] = useState(true);
 
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -28,6 +39,8 @@ export const CategoryPage = (props: Props) => {
     const productService = new ProductService();
 
     useEffect(() => {
+        setLoading(true);
+
         let products: Product[] = [];
         if (id == -1) {
             setTitle(filter || '');
@@ -50,8 +63,54 @@ export const CategoryPage = (props: Props) => {
         }
 
         setProducts(products);
+        setFilteredProducts(products);
 
+        let priceMin = Infinity; 
+        let priceMax = -1;
+        const colors = new Set<string>();
+        const sizes = new Set<string>();
+        products.forEach((p: Product) => {
+            priceMin = Math.min(priceMin, p.discountedPrice ?? p.price); 
+            priceMax = Math.max(priceMax, p.discountedPrice ?? p.price); 
+
+            p.variants?.colorVariants.forEach(c => colors.add(c.color));
+            p.variants?.sizeVariants.forEach(s => sizes.add(s));
+        });
+
+        setFilterOptions({
+            price: { min: priceMin, max: priceMax },
+            colors: Array.from(colors),
+            sizes: Array.from(sizes)
+        });
+
+        setSelectedFilters((prev) => {
+            return {...prev, price: { min: priceMin, max: priceMax }}
+        });
+        if (!id) {
+            return ;
+        }
+        setLoading(false);
     }, [id]);
+
+
+    const applyFilter = () => {
+       const filteredProducts = products.filter(p => {
+            const price = p.discountedPrice ?? p.price;
+            const priceMatch = price >= selectedFilters.price.min && price <= selectedFilters.price.max;
+            let colorMatch = false || selectedFilters.colors.length == 0;
+            p.variants?.colorVariants.forEach((c) => {
+                colorMatch = colorMatch || selectedFilters.colors.includes(c.color);
+            });
+            let sizeMatch = false || selectedFilters.sizes.length == 0;
+            p.variants?.sizeVariants.forEach((s) => {
+                sizeMatch = sizeMatch || selectedFilters.sizes.includes(s);
+            }); 
+            
+            return priceMatch && colorMatch && sizeMatch;
+       });
+        
+       setFilteredProducts(filteredProducts);
+    }
 
     return (
         <div className="scrollbar-hidden h-[100vh]">
@@ -59,9 +118,11 @@ export const CategoryPage = (props: Props) => {
              <div className="mx-[100px] mt-6 mb-8">
                 <div className="flex gap-8">
                     <div className="w-[295px] border border-border rounded-[20px] h-fit"> 
-                        <Filters />
+                        {!isLoading && <Filters   
+                                filterOptions={filterOptions}  setSelectedFilters={setSelectedFilters} applyFilter={applyFilter} 
+                        />}
                     </div>
-                    <ProductList products={products} title={title} />
+                    <ProductList products={filteredProducts} title={title} />
                 </div>
              </div>
              <Footer />

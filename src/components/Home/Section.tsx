@@ -3,12 +3,12 @@ import { ProductCard } from "./ProductCard";
 import styles from "./Section.module.css";
 import { Button } from "@/utils/components-shadcn/ui/button";
 import { useRouter } from "next/router";
-import { SPECIAL_FILTERS } from "@/utils/Constant";
+import { SectionModel } from "./Home";
 
 interface Props {
     isLast: boolean;
     hideViewAllBtn?: boolean;
-    sectionData: {title: string, filterName: SPECIAL_FILTERS, products: Product[]};
+    sectionData: SectionModel;
     customStyles?: string;
 }
 
