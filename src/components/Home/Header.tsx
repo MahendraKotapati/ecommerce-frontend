@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import styles from "./Header.module.css";
 import { BRAND_NAME } from "./Home";
 import { PiShoppingCartSimpleBold } from "react-icons/pi";
 import { FaCircleUser } from "react-icons/fa6";
@@ -7,10 +6,19 @@ import { IoSearch } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { Store } from "@/lib/store";
 import { useState } from "react";
-import { PRODUCTS_LIST } from "@/utils/Constant";
+import { PRODUCTS_LIST, SPECIAL_FILTERS } from "@/utils/Constant";
 import { Product } from "@/models/Product";
 import { FaXmark } from "react-icons/fa6";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/utils/components-shadcn/ui/tooltip";
+
+
+const navigation = [
+    {navTitle: 'Shop', navLink: '/category/-1'}, 
+    {navTitle: 'New Arrivals', navLink: `/category/-1?filter=${SPECIAL_FILTERS.NEW_ARRIVALS}`}, 
+    {navTitle: 'Top Selling', navLink: `/category/-1?filter=${SPECIAL_FILTERS.TOP_SELLING}`}, 
+    {navTitle: 'On Sale', navLink: `/category/-1?filter=${SPECIAL_FILTERS.ON_SALE}`}
+];
+
 
 interface Props {
     basicHeader?: boolean;
@@ -19,7 +27,6 @@ interface Props {
 
 export const Header = (props: Props) => {
 
-    const navigation = ["Shop", "On Sale", "New Arrivals", "Brands"];
     const router = useRouter();
     const cartItems = useSelector((state: Store) => state.cart.items);
     const [searchResults, setSearchResults] = useState<Product[]>([]);
@@ -36,12 +43,12 @@ export const Header = (props: Props) => {
     }
 
     return (
-        <div className={styles.header_container + ` ${props.customStyles}`}>
-            <div className={styles.brand + " cursor-pointer"} onClick={() => goToPage("/")}>{BRAND_NAME}</div>
-            {!props.basicHeader && <div className={styles.nav_container}>
+        <div className={"flex py-3 px-[100px] " + ` ${props.customStyles}`}>
+            <div className={"text-[24px] font-bold cursor-pointer"} onClick={() => goToPage("/")}>{BRAND_NAME}</div>
+            {!props.basicHeader && <div className={"flex gap-6 items-center mx-8"}>
                 {
-                    navigation.map((navTitle) => {
-                        return <div key={navTitle} className={styles.nav_title}> {navTitle} </div>;
+                    navigation.map((nav) => {
+                        return <div key={nav.navTitle} onClick={() =>goToPage(nav.navLink)} className={"text-base font-medium cursor-pointer"}> {nav.navTitle} </div>;
                     })
                 }
             </div>}
@@ -62,7 +69,7 @@ export const Header = (props: Props) => {
                         searchResults.map((product, index) => {
                             return (
                                 <>
-                                    <div className="flex gap-2.5 items-center cursor-pointer" onClick={() => goToPage(`product/${product.id}`)}> 
+                                    <div className="flex gap-2.5 items-center cursor-pointer" onClick={() => goToPage(`/product/${product.id}`)}> 
                                         <img src={product.variants?.colorVariants[0].images[0]} className="w-15 h-15 rounded-[8px] border border-brand" />
                                         <div className="flex-1 flex flex-col">
                                             <p className="text-[14px]"> {product.name } </p>

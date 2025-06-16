@@ -20,6 +20,10 @@ export class ProductService {
         return PRODUCTS_LIST;
     }
 
+    getOnSaleProducts() {
+        return PRODUCTS_LIST.filter(p => p.onSale);
+    }
+
     getProductsByDressingStyle(dressStyle: DRESS_STYLE) {
         const categories = CATEGORIES_LIST.filter((c) => c.dressStyle == dressStyle);
         let products: Product[] = [];

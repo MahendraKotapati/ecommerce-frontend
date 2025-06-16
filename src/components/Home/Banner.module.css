@@ -1,8 +1,0 @@
-.brand_container {
-    background-color: black;
-    height: 120px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-}

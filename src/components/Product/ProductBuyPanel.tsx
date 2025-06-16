@@ -37,7 +37,7 @@ export const ProductBuyPanel = (props: Props) => {
     const cartItems = useSelector((state: Store) => state.cart.items);
     const dispatch = useDispatch();
 
-    const [quantity, setQuantity] = useState(cartItems.find(item => item.id == id)?.quantity || 0);
+    const [quantity, setQuantity] = useState(0);
 
     const colorBgMap: {[color: string] : string} = {};
     colors.map((color) => {
@@ -52,11 +52,17 @@ export const ProductBuyPanel = (props: Props) => {
         }
         setProductImages(productImages);
         setSelectedImageIdx(0);
+
+        setQuantity(cartItems.find(item => item.id == id && selectedColor == item.colorvarinat && item.sizeVariant == selectedSize)?.quantity || 0);
     }, [selectedColor]);
 
     useEffect(() => {
         setSelectedColor(colors[0]);
-    }, [id])
+    }, [id]);
+
+    useEffect(() => {
+        setQuantity(cartItems.find(item => item.id == id && selectedColor == item.colorvarinat && item.sizeVariant == selectedSize)?.quantity || 0);
+    }, [selectedSize]);
 
     const addToCartHandler = () => {
         if (quantity > 0)
@@ -78,12 +84,12 @@ export const ProductBuyPanel = (props: Props) => {
 
     const updateQuantityHandler = (change: number, productId: string) => {
         if (quantity + change <= 0) {
-            dispatch(removeItem({id}));
+            dispatch(removeItem({id, colorvarinat: selectedColor, sizeVariant: selectedSize }));
             setQuantity((quantity: number) => quantity + change);
             return ;
         }
 
-        dispatch(updateQuatity({id, quantity: quantity + change})); 
+        dispatch(updateQuatity({id, colorvarinat: selectedColor, sizeVariant: selectedSize, quantity: quantity + change})); 
         setQuantity((quantity: number) => quantity + change);
     }
 
@@ -195,7 +201,7 @@ export const ProductBuyPanel = (props: Props) => {
 
                     <hr className="border-border my-1"/>
                     <div className="flex gap-1.5 justify-center">
-                        <QuantityButton quantity={quantity} productId={id} updateQuantity={updateQuantityHandler} customStyles="w-[150px] w-1/4" />
+                        <QuantityButton quantity={quantity} productId={id} colorvarinat={selectedColor} sizeVariant={selectedSize} updateQuantity={updateQuantityHandler} customStyles="w-[150px] w-1/4" />
                         <Button className="rounded-full w-3/4 h-[44px] cursor-pointer bg-brand hover:bg-brand" onClick={addToCartHandler}> Add to Cart </Button>
                     </div>
                 </div>

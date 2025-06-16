@@ -1,6 +1,5 @@
 import { Product } from "@/models/Product";
 import { ProductCard } from "./ProductCard";
-import styles from "./Section.module.css";
 import { Button } from "@/utils/components-shadcn/ui/button";
 import { useRouter } from "next/router";
 import { SectionModel } from "./Home";
@@ -23,7 +22,7 @@ export const Section = (props: Props) => {
 
     return (
         <div className={`mt-16 mx-[110px] flex flex-col items-center ${props.customStyles}`}>
-            <div className={"mb-8 uppercase " + styles.title}> {sectionData.title} </div>
+            <div className={"mb-8 uppercase text-5xl font-semibold"}> {sectionData.title} </div>
             <div className="flex gap-4">
                 {sectionData.products.map((product) => {
                     return (<ProductCard key={product.id}  product={product}></ProductCard>);

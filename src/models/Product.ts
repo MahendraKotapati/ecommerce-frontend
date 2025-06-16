@@ -14,4 +14,5 @@ export interface Product {
 
     categoryId: number;
     isNew?: boolean;
+    onSale?: boolean;
 }

@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { Footer } from "../Footer";
 import { Header } from "../Home/Header";
-import { ProductCard } from "../Home/ProductCard";
-import { DRESS_STYLE, PRODUCTS_LIST, SPECIAL_FILTERS } from "@/utils/Constant";
+import { DRESS_STYLE, SPECIAL_FILTERS } from "@/utils/Constant";
 import { FilterOptions, Filters } from "./Filters";
 import { ProductList } from "./ProductList";
 import { useRouter } from "next/router";
@@ -51,6 +50,8 @@ export const CategoryPage = (props: Props) => {
                 products = productService.getNewArrialProducts();
             } else if (filter == SPECIAL_FILTERS.TOP_SELLING) {
                 products = productService.getTopSellingProducts();
+            } else if (filter == SPECIAL_FILTERS.ON_SALE) {
+                products = productService.getOnSaleProducts();
             } else {
                 products = productService.getProductsByDressingStyle(filter as DRESS_STYLE);
             } 
@@ -90,7 +91,7 @@ export const CategoryPage = (props: Props) => {
             return ;
         }
         setLoading(false);
-    }, [id]);
+    }, [id, filter]);
 
 
     const applyFilter = () => {
@@ -118,8 +119,11 @@ export const CategoryPage = (props: Props) => {
              <div className="mx-[100px] mt-6 mb-8">
                 <div className="flex gap-8">
                     <div className="w-[295px] border border-border rounded-[20px] h-fit"> 
-                        {!isLoading && <Filters   
-                                filterOptions={filterOptions}  setSelectedFilters={setSelectedFilters} applyFilter={applyFilter} 
+                        {!isLoading && 
+                            <Filters  filterOptions={filterOptions}  
+                                      setSelectedFilters={setSelectedFilters} 
+                                      applyFilter={applyFilter} 
+                                      disableFilters={products.length == 0}
                         />}
                     </div>
                     <ProductList products={filteredProducts} title={title} />

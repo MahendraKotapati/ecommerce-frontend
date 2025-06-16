@@ -1,5 +1,4 @@
 import { Product } from "@/models/Product";
-import styles from "./productCard.module.css";
 import { FaStar } from "react-icons/fa6";
 import { FaStarHalf } from "react-icons/fa6";
 import { useRouter } from "next/router";

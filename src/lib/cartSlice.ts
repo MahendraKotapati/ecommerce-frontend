@@ -31,11 +31,11 @@ export const cartSlice = createSlice({
       state.items.push(action.payload);
     },
     updateQuatity: (state, action) => {
-      const idx = state.items.findIndex(a => a.id == action.payload.id);
+      const idx = state.items.findIndex(a => a.id == action.payload.id && a.colorvarinat == action.payload.colorvarinat && a.sizeVariant == action.payload.sizeVariant);
       state.items[idx].quantity = action.payload.quantity;
     },
     removeItem: (state, action) => {
-      const idx = state.items.findIndex(a => a.id == action.payload.id);
+      const idx = state.items.findIndex(a => a.id == action.payload.id && a.colorvarinat == action.payload.colorvarinat && a.sizeVariant == action.payload.sizeVariant);
       state.items.splice(idx, 1);
     }
   },

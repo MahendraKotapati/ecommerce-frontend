@@ -12,7 +12,8 @@ export enum DRESS_STYLE {
 
 export enum SPECIAL_FILTERS {
     NEW_ARRIVALS = 'New Arrivals',
-    TOP_SELLING = 'Top Selling'
+    TOP_SELLING = 'Top Selling',
+    ON_SALE = 'On Sale'
 }
 
 // {id: 3, name: 'jeans', dressStyle: DRESS_STYLE.CASUAL}
@@ -68,7 +69,7 @@ const CASUAL_TSHIRTS: Product[] = [
       id: "3",
       name: "Weekend Relax Tee",
       description: "Kick back in this relaxed-fit T-shirt perfect for weekends. Ultra-soft fabric feels great against the skin. Slightly oversized for a laid-back look. Stitched with reinforced seams for long-term use. Simple yet stylish essential.",
-      discountedPrice: 155,
+      discountedPrice: 50,
       price: 185,
       quantity: 410,
       rating: 3,
@@ -82,7 +83,8 @@ const CASUAL_TSHIRTS: Product[] = [
         sizeVariants: ["small", "medium", "large"]
       },
       categoryId: 1,
-      isNew: true
+      isNew: false,
+      onSale: true
     },
     {
       id: "4",
@@ -211,8 +213,11 @@ const CASUAL_SHIRTS: Product[] = [
         ],
         sizeVariants: ["small", "medium", "large", "x-large"]
       },
-      categoryId: 2
-    }
+      categoryId: 2,
+      isNew: true
+
+    },
+  
 ];
   
 

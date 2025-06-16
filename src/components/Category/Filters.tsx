@@ -18,11 +18,12 @@ interface Props {
     filterOptions: FilterOptions,
     setSelectedFilters: (filterOptions: FilterOptions) => void;
     applyFilter: () => void;
+    disableFilters: boolean;
 }
 
 export const Filters = (props: Props) => {
 
-    const {filterOptions, setSelectedFilters, applyFilter} = {...props};
+    const {filterOptions, setSelectedFilters, applyFilter, disableFilters} = {...props};
     const [categories, setCategories] = useState(CATEGORIES_LIST);
     const [price, setPrice] = useState<number[]>([filterOptions.price.min, filterOptions.price.max]);
     const [filtersOpenState, setFilterOpenState] = useState({price: true, color: true, size: true});
@@ -44,8 +45,25 @@ export const Filters = (props: Props) => {
         });
     }, [selectedColors, selectedSizes, price]);
 
+    // might need to have individual min, max useState
+    useEffect(() => {
+        setPrice([filterOptions.price.min, filterOptions.price.max]);
+    }, [filterOptions]);
+
+    useEffect(() => {
+        if (disableFilters)
+            setFilterOpenState({price: false, color: false, size: false});
+        else {
+            setFilterOpenState({price: true, color: true, size: true});
+        }
+    }, [disableFilters]);
+
+
 
     const toggleFilter = (filterName: string) => {
+        if (disableFilters) {
+            return ;
+        }
         setFilterOpenState((filter: any) => {
             return {...filter, [filterName]: !filter[filterName]};
         });
@@ -105,10 +123,10 @@ export const Filters = (props: Props) => {
             <hr className="border-border my-4" />
             
             <div>
-                <div className="flex justify-between items-center">
-                    <p className="text-base font-semibold"> Price </p>
-                    {filtersOpenState.price && <FaChevronUp onClick={() => toggleFilter('price')} className='h-4 w-4 cursor-pointer' />}
-                    {!filtersOpenState.price && <FaChevronDown onClick={() => toggleFilter('price')} className='h-4 w-4 cursor-pointer' />}
+                <div className={`flex justify-between items-center ${disableFilters ? 'text-secondary cursor-not-allowed ' : 'cursor-pointer ' }`} onClick={() => toggleFilter('price')}>
+                    <p className={`text-base font-semibold`}> Price </p>
+                    {filtersOpenState.price && <FaChevronUp className='h-4 w-4' />}
+                    {!filtersOpenState.price && <FaChevronDown className='h-4 w-4' />}
                 </div>
                {filtersOpenState.price && <div className="mt-6">
                     <Slider.Root
@@ -118,7 +136,7 @@ export const Filters = (props: Props) => {
                         step={1}
                         minStepsBetweenThumbs={1}
                         value={[price[0], price[1]]}
-                        onValueChange={(value) => { setPrice(value); console.log('value: ', value);}}
+                        onValueChange={(value) => setPrice(value)}
                     >
                         <Slider.Track className="relative h-2 w-full grow overflow-hidden rounded-full bg-muted">
                             <Slider.Range className="absolute h-full bg-primary" />
@@ -133,13 +151,13 @@ export const Filters = (props: Props) => {
                 </div>}
             </div>
 
-            <hr className="border-border mt-10 mb-4" />
+            <hr className={`border-border my-4 ${filtersOpenState.price ? 'mt-10' : ''}`} />
 
             <div>
-                <div className="flex justify-between items-center">
+                <div onClick={() => toggleFilter('color')} className={`flex justify-between items-center ${disableFilters ? 'text-secondary cursor-not-allowed ' : 'cursor-pointer ' }`}>
                     <p className="text-base font-semibold"> Colors </p>
-                    {filtersOpenState.color && <FaChevronUp onClick={() => toggleFilter('color')} className='h-4 w-4 cursor-pointer' />}
-                    {!filtersOpenState.color && <FaChevronDown onClick={() => toggleFilter('color')} className='h-4 w-4 cursor-pointer' />}
+                    {filtersOpenState.color && <FaChevronUp className='h-4 w-4' />}
+                    {!filtersOpenState.color && <FaChevronDown className='h-4 w-4' />}
                 </div>
 
                 {
@@ -168,10 +186,10 @@ export const Filters = (props: Props) => {
             <hr className="border-border my-4" />
 
             <div>
-                <div className="flex justify-between items-center">
+                <div onClick={() => toggleFilter('size')} className={`flex justify-between items-center ${disableFilters ? 'text-secondary cursor-not-allowed ' : 'cursor-pointer ' }`}>
                     <p className="text-base font-semibold"> Size </p>
-                    {filtersOpenState.size && <FaChevronUp onClick={() => toggleFilter('size')} className='h-4 w-4 cursor-pointer' />}
-                    {!filtersOpenState.size && <FaChevronDown onClick={() => toggleFilter('size')} className='h-4 w-4 cursor-pointer' />}
+                    {filtersOpenState.size && <FaChevronUp className='h-4 w-4' />}
+                    {!filtersOpenState.size && <FaChevronDown className='h-4 w-4' />}
                 </div>
 
                 {
