@@ -33,8 +33,8 @@ export const ProductCard = (props: Props) => {
         <div className="flex">
             <div className="flex gap-1 my-1">
                 {
-                    Array(Math.floor(roundedRating)).fill(0).map(() => {
-                        return <FaStar className="h-3.5 w-3.5" color="#FFC633"/> 
+                    Array(Math.floor(roundedRating)).fill(0).map((_, index) => {
+                        return <FaStar key={index} className="h-3.5 w-3.5" color="#FFC633"/> 
                     })
                 }
                 {

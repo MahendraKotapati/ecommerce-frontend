@@ -9,9 +9,6 @@ import { Header } from "../Home/Header";
 import { ProductService } from "@/services/product.service";
 import { useRouter } from "next/router";
 
-interface Props {
-}
-
 enum TAB {
     PRODUCT_DETAILS = 'Product Details',
     REVIEWS = 'Reviews',
@@ -20,7 +17,7 @@ enum TAB {
 
 const TAB_LIST = Object.values(TAB);
 
-export const ProductDetail = (props: Props) => {
+export const ProductDetail = () => {
 
     const [product, setProduct] = useState<Product>({} as Product);
     const [selectedTab, setSelectedTab] = useState(TAB.REVIEWS);

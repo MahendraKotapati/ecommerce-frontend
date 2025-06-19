@@ -17,10 +17,7 @@ const filtersInitialState: FilterOptions  = {
     sizes: []
 }
 
-interface Props {
-}
-
-export const CategoryPage = (props: Props) => {
+export const CategoryPage = () => {
 
     const [products, setProducts] = useState<Product[]>([]);
     const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);

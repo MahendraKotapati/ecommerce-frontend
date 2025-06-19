@@ -35,7 +35,7 @@ export const Banner = () => {
                 <div className="flex gap-16 mt-8">
                     {NUMBERS_INFO.map((info) => {
                         return (
-                            <div className="flex flex-col">
+                            <div key={info.title} className="flex flex-col">
                                 <p className="text-4xl"> {info.value} </p>
                                 <p className="text-secondary"> {info.title} </p>
                             </div>

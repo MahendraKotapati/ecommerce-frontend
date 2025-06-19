@@ -100,7 +100,7 @@ export const Address = (props: Props) => {
                         <SelectContent>
                             <SelectGroup>
                                 {US_STATE_LIST.map((state: {name: string, code: string}) => {
-                                    return (<SelectItem value={state.code}>{state.name}</SelectItem>)
+                                    return (<SelectItem key={state.code} value={state.code}>{state.name}</SelectItem>)
                                 })}
                             </SelectGroup>
                         </SelectContent>

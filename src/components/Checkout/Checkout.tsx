@@ -7,9 +7,6 @@ import { Summary } from "./Summary"
 import { useReducer, useState } from "react";
 import { useRouter } from "next/router"
 
-interface Props {
-}
-
 const addressInitialState: Address = { firstName: '', lastName: '', streetAddress: '', city: '', state: '', country: 'United States', zipCode: '' };
 const addressErrorsInitialState: AddressErrors  = { firstName: false, lastName: false, streetAddress: false, city: false, state: false, country: false, zipCode: false };
 
@@ -49,7 +46,7 @@ const paymentInfoErrorReducer = (state: PaymentInfoErrors, action: {type: string
     }
 }
 
-export const Checkout = (props: Props) => {
+export const Checkout = () => {
 
     const addressErrorsReducer = (state: AddressErrors, action: {type: string, data: boolean}) => {
         switch (action.type) {

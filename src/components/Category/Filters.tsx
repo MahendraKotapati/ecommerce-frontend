@@ -111,7 +111,7 @@ export const Filters = (props: Props) => {
                 {
                     categories.map((category) => {
                         return (
-                            <div className="flex justify-between items-center cursor-pointer" onClick={() => goToCategory(category.id)}>
+                            <div key={category.id} className="flex justify-between items-center cursor-pointer" onClick={() => goToCategory(category.id)}>
                                 <p className="text-base text-secondary capitalize"> {category.name} </p>
                                 <FaChevronRight className='h-4 w-4 text-secondary' />
                             </div>
@@ -199,6 +199,7 @@ export const Filters = (props: Props) => {
                                 filterOptions.sizes.map((size) => {
                                     return (
                                         <Button 
+                                            key={size}
                                             onClick={() => selectSize(size)}
                                             className={`capitalize cursor-pointer rounded-full
                                                         ${(selectedSizes.includes(size)) ? 'bg-brand hover:bg-brand' : ' bg-border text-secondary hover:bg-border hover:text-secondary'}`}> 

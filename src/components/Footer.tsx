@@ -40,7 +40,7 @@ export const Footer = () => {
                 {
                     FOOTER_LINKS.map((f) => {
                         return (
-                            <div>
+                            <div key={f.title}>
                                 <p style={{fontSize: 16}}> {f.title} </p>
                                 {
                                     f.links.map((link, index) => {

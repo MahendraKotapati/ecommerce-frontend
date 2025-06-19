@@ -74,7 +74,7 @@ export const ProductList = (props: Props) => {
                             <SelectContent>
                                 <SelectGroup>
                                     {Object.values(SORT_OPTIONS).map((option) => {
-                                        return (<SelectItem value={option}>{option}</SelectItem>)
+                                        return (<SelectItem key={option} value={option}>{option}</SelectItem>)
                                     })}
                                 </SelectGroup>
                             </SelectContent>
@@ -104,7 +104,7 @@ export const ProductList = (props: Props) => {
                             {
                                 new Array(Math.ceil(products.length/PAGE_SIZE)).fill(0).map((a, index) => {
                                     return (
-                                    <PaginationItem onClick={() => setPage(index)}>
+                                    <PaginationItem key={index} onClick={() => setPage(index)}>
                                         <PaginationLink href="#" isActive={page==index}>
                                             {index+1}
                                         </PaginationLink>

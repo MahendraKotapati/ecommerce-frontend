@@ -102,7 +102,7 @@ export const ProductBuyPanel = (props: Props) => {
                         {
                             productImages.slice(0, 3).map((imageUrl, index) => {
                                 return (
-                                    <div className="relative flex-1 flex cursor-pointer">
+                                    <div key={index} className="relative flex-1 flex cursor-pointer">
                                         <img src={imageUrl} 
                                             onClick={() => setSelectedImageIdx(index)} 
                                             className={`absolute inset-0 w-full h-full rounded-[20px] 
@@ -128,8 +128,8 @@ export const ProductBuyPanel = (props: Props) => {
                     <div className="flex items-center">
                         <div className="flex gap-1 my-1">
                             {
-                                Array(Math.floor(roundedRating)).fill(0).map(() => {
-                                    return <FaStar className="h-6 w-6" color="#FFC633"/> 
+                                Array(Math.floor(roundedRating)).fill(0).map((_, index) => {
+                                    return <FaStar key={index} className="h-6 w-6" color="#FFC633"/> 
                                 })
                             }
                             {
@@ -188,6 +188,7 @@ export const ProductBuyPanel = (props: Props) => {
                                 sizes.map((size) => {
                                     return (
                                         <Button 
+                                            key={size}
                                             onClick={() => setSelectedSize(size)}
                                             className={`capitalize cursor-pointer rounded-full
                                                         ${(selectedSize == size) ? 'bg-brand hover:bg-brand' : ' bg-border text-secondary hover:bg-border hover:text-secondary'}`}> 
