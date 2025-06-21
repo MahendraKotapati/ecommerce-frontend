@@ -53,7 +53,7 @@ export const Header = (props: Props) => {
                 }
             </div>}
 
-            {!props.basicHeader && <div className="flex items-center bg-gray-100 relative rounded-full w-[577px] p-2 px-4">
+            {!props.basicHeader && <div className="flex items-center bg-gray-100 relative rounded-full w-[577px] p-2 px-4 border border-transparent focus-within:border-brand focus-within:shadow-sm transition">
                  <IoSearch className="h-6 w-6 text-black opacity-40" />
                 <input
                     type="text"

@@ -54,15 +54,22 @@ export const Footer = () => {
                 </div>
             </div>
             <hr className="mt-10 text-[#00000019]" />
-            <div className="mt-3 ml-auto flex gap-2">
-                {PAYMENTS_ACCEPTED.map((icon, index) => {
-                    return (
-                        <div key={index} className="w-11 h-8 p-1 bg-white border border-tertiary rounded-md flex items-center justify-center">
-                            <img src={icon}></img>
-                        </div>
-                    )
-                })}
+            <div className="mt-3 flex">
+
+                <SecondaryText> {"Developed By "} 
+                    <a className="text-brand cursor-pointer underline" href="https://www.linkedin.com/in/mahendra-kotapati/">Mahendra Kotapati</a> 
+                </SecondaryText>
+                <div className="ml-auto flex gap-2">
+                    {PAYMENTS_ACCEPTED.map((icon, index) => {
+                        return (
+                            <div key={index} className="w-11 h-8 p-1 bg-white border border-tertiary rounded-md flex items-center justify-center">
+                                <img src={icon}></img>
+                            </div>
+                        )
+                    })}
+                </div>
             </div>
+            
         </div>
     )
 }

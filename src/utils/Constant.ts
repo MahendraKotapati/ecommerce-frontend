@@ -93,7 +93,7 @@ const CASUAL_TSHIRTS: Product[] = [
       discountedPrice: 245,
       price: 295,
       quantity: 160,
-      rating: 5,
+      rating: 3.5,
       variants: {
         colorVariants: [
           { color: "darkviolet", images: ['/images/tshirts/graphic_tee.png'] },
@@ -102,7 +102,6 @@ const CASUAL_TSHIRTS: Product[] = [
         sizeVariants: ["small", "medium", "large", "x-large"]
       },
       categoryId: 1,
-      isNew: true
     },
     {
       id: "5",
@@ -136,7 +135,7 @@ const CASUAL_SHIRTS: Product[] = [
             colorVariants: [
                 { color: "darkred", images: ["/images/P1_front.png", "/images/P1_back.png", "/images/P1_side.png"]},
                 { color: "green", images: ["/images/P1_green_front.png", "/images/P1_green_back.png", "/images/P1_green_side.png"]},
-                { color: "black", images: ["/images/P1_black_front.png", "/images/P1_black_back.png", "/images/P1_black_side.png"]}
+                { color: "black", images: ["/images/P1_black_front.png", "/images/P1_black_back.png"]}
             ],
             sizeVariants : ["small", "medium", "large", "x-large"]
         },
@@ -159,7 +158,8 @@ const CASUAL_SHIRTS: Product[] = [
         ],
         sizeVariants: ["small", "medium", "large", "x-large"]
       },
-      categoryId: 2
+      categoryId: 2,
+      isNew: true
     },
     {
       id: "7",
@@ -168,7 +168,7 @@ const CASUAL_SHIRTS: Product[] = [
       discountedPrice: 310,
       price: 360,
       quantity: 300,
-      rating: 4.5,
+      rating: 3.5,
       variants: {
         colorVariants: [
           { color: "darkmagenta", images: ['/images/shirts/slimfit.png'] },
@@ -177,8 +177,7 @@ const CASUAL_SHIRTS: Product[] = [
         ],
         sizeVariants: ["medium", "large", "x-large"]
       },
-      categoryId: 2,
-      isNew: true
+      categoryId: 2
     },
     {
       id: "8",
@@ -190,8 +189,8 @@ const CASUAL_SHIRTS: Product[] = [
       rating: 3,
       variants: {
         colorVariants: [
-          { color: "darkkhaki", images: [] },
-          { color: "darkslategray", images: [] },
+          { color: "darkslategray", images: ['/images/shirts/lenin_shirt.png'] },
+          { color: "black", images: [] },
           { color: "darkorchid", images: [] }
         ],
         sizeVariants: ["small", "medium", "large"]
@@ -213,15 +212,385 @@ const CASUAL_SHIRTS: Product[] = [
         ],
         sizeVariants: ["small", "medium", "large", "x-large"]
       },
-      categoryId: 2,
-      isNew: true
-
+      categoryId: 2
     },
   
 ];
-  
 
-export const PRODUCTS_LIST: Product[] = [...CASUAL_SHIRTS, ...CASUAL_TSHIRTS].map((p, index) => {
+const FORMAL_SHIRTS: Product[] = [
+  {
+    "id": "1",
+    "name": "Textured Button-Down Formal Shirt",
+    "description": "Add dimension to your formalwear with this textured shirt. Crafted from soft, breathable cotton with a subtle weave. Button-down collar keeps your look sharp all day. Ideal for office, interviews, or formal dinners. Combines comfort and elegance effortlessly.",
+    "discountedPrice": 199,
+    "price": 249,
+    "quantity": 210,
+    "rating": 4,
+    "variants": {
+      colorVariants: [
+        { "color": "white", "images": ["/images/formal_shirts/textured_shirt.png"] },
+        { "color": "skyblue", "images": [] },
+        { "color": "navy", "images": [] }
+      ],
+      sizeVariants: ["small", "medium", "large", "x-large"],
+    },
+    categoryId: 4,
+  },
+  {
+    "id": "2",
+    "name": "Classic Spread Collar Shirt",
+    "description": "Timeless elegance meets comfort in this spread collar shirt. Designed with wrinkle-resistant cotton for all-day neatness. Buttoned cuffs and a curved hem for versatility. A staple for corporate professionals. Pairs effortlessly with suits or chinos.",
+    "discountedPrice": 179,
+    "price": 229,
+    "quantity": 180,
+    "rating": 5,
+    "variants": {
+      "colorVariants": [
+        { "color": "steelblue", "images": ["/images/formal_shirts/spread_collar_shirt.png"] },
+        { "color": "lightgray", "images": [] },
+        { "color": "maroon", "images": [] }
+      ],
+      "sizeVariants": ["small", "medium", "large", "x-large"]
+    },
+    categoryId: 4,
+  },
+  {
+    "id": "3",
+    "name": "Premium Twill Formal Shirt",
+    "description": "Crafted from premium twill cotton for a soft and smooth feel. Cut in a tailored fit with subtle sheen for elegance. Ideal for client presentations and formal events. Features double-stitched seams for durability. A refined wardrobe essential.",
+    "discountedPrice": 249,
+    "price": 299,
+    "quantity": 120,
+    "rating": 4,
+    "variants": {
+      "colorVariants": [
+        { "color": "dimgray", "images": ["/images/formal_shirts/twill_shirt.png"] },
+        { "color": "lightblue", "images": [] },
+        { "color": "forestgreen", "images": [] }
+      ],
+      "sizeVariants": ["small", "medium", "large", "x-large"]
+    },
+    categoryId: 4,
+  },
+  {
+    "id": "4",
+    "name": "Checkered Business Shirt",
+    "description": "A contemporary twist on classic formals with subtle checks. Made from breathable and lightweight poplin fabric. Enhances appearance without overpowering the look. Ideal for semi-formal meetings and everyday office use. Keeps you sharp from 9 to 5.",
+    "discountedPrice": 159,
+    "price": 209,
+    "quantity": 300,
+    "rating": 4,
+    "variants": {
+      "colorVariants": [
+        { "color": "firebrick", "images": ["/images/formal_shirts/check_shirt.png"] },
+        { "color": "midnightblue", "images": [] },
+        { "color": "gray", "images": [] },
+      ],
+      "sizeVariants": ["small", "medium", "large", "x-large"]
+    },
+    categoryId: 4,
+  },
+  {
+    "id": "5",
+    "name": "Stretch Cotton Dress Shirt",
+    "description": "Combining comfort with structure, this shirt features stretch cotton. Gives ease of movement without sacrificing a tailored look. Designed with a slim placket and reinforced seams. Perfect for long workdays and evening dinners. Stays crisp all day.",
+    "discountedPrice": 219,
+    "price": 269,
+    "quantity": 170,
+    "rating": 5,
+    "variants": {
+      "colorVariants": [
+        { "color": "teal", "images": ["/images/formal_shirts/stretch_cotton_shirt.png"] },
+        { "color": "ivory", "images": [] },
+        { "color": "steelblue", "images": [] }
+      ],
+      "sizeVariants": ["small", "medium", "large", "x-large"], 
+    },
+    categoryId: 4,
+  }
+];
+
+const BLAZERS_AND_SUITS = [
+  {
+    "id": "1",
+    "name": "Modern Fit Two-Button Blazer",
+    "description": "Tailored for a sharp, modern silhouette. This two-button blazer features structured shoulders and notched lapels. Made from a breathable blend for all-season comfort. Ideal for office, events, or smart casual wear. A wardrobe essential with versatile charm.",
+    "discountedPrice": 279,
+    "price": 299,
+    "quantity": 85,
+    "rating": 5,
+    "variants": {
+      "colorVariants": [
+        { "color": "navy", "images": [] },
+        { "color": "darkslategray", "images": [] },
+        { "color": "black", "images": [] }
+      ],
+      "sizeVariants": ["small", "medium", "large"]
+    }
+  },
+  {
+    "id": "2",
+    "name": "Classic Single-Breasted Suit",
+    "description": "This single-breasted suit brings timeless elegance to your formalwear. Crafted with a fine wool-blend fabric for refined drape. Flat-front trousers complete the ensemble. Designed for business meetings and formal events. Elevates your style with confidence.",
+    "discountedPrice": 299,
+    "price": 349,
+    "quantity": 60,
+    "rating": 4.5,
+    "variants": {
+      "colorVariants": [
+        { "color": "gray", "images": [] },
+        { "color": "midnightblue", "images": [] },
+        { "color": "darkolivegreen", "images": [] }
+      ],
+      "sizeVariants": ["medium", "large", "x-large"]
+    }
+  },
+  {
+    "id": "3",
+    "name": "Slim Fit Tuxedo Blazer",
+    "description": "Elevate your evening look with this slim-fit tuxedo blazer. Features satin lapels and a tailored profile. Perfect for weddings, galas, and black-tie events. Lightweight lining ensures comfort without bulk. Designed for a confident, polished appearance.",
+    "discountedPrice": 259,
+    "price": 299,
+    "quantity": 40,
+    "rating": 4,
+    "variants": {
+      "colorVariants": [
+        { "color": "black", "images": [] },
+        { "color": "darkred", "images": [] },
+        { "color": "slategray", "images": [] }
+      ],
+      "sizeVariants": ["small", "medium", "large", "x-large"]
+    }
+  },
+  {
+    "id": "4",
+    "name": "Double-Breasted Formal Suit",
+    "description": "Classic double-breasted design with a modern touch. Features peak lapels and structured fit for a bold silhouette. Pants are tapered for contemporary appeal. Ideal for power dressing or formal presentations. Durable, wrinkle-resistant fabric for lasting wear.",
+    "discountedPrice": 289,
+    "price": 329,
+    "quantity": 55,
+    "rating": 4.5,
+    "variants": {
+      "colorVariants": [
+        { "color": "darkgray", "images": [] },
+        { "color": "steelblue", "images": [] },
+        { "color": "saddlebrown", "images": [] }
+      ],
+      "sizeVariants": ["small", "large", "x-large"]
+    }
+  },
+  {
+    "id": "5",
+    "name": "Casual Cotton Blazer",
+    "description": "A smart-casual cotton blazer perfect for semi-formal days. Lightweight, breathable fabric with unstructured fit. Features patch pockets and a soft shoulder line. Pairs well with chinos or dark jeans. Style without sacrificing comfort.",
+    "discountedPrice": 189,
+    "price": 229,
+    "quantity": 120,
+    "rating": 3.5,
+    "variants": {
+      "colorVariants": [
+        { "color": "beige", "images": [] },
+        { "color": "lightgray", "images": [] },
+        { "color": "rosybrown", "images": [] }
+      ],
+      "sizeVariants": ["small", "medium", "large", "x-large"]
+    }
+  }
+];
+
+const JOGGERS: Product[] = [
+  {
+    "id": "1",
+    "name": "Performance Flex Joggers",
+    "description": "Engineered for tough workouts with stretchable fabric. Sweat-wicking finish keeps you dry during intense sessions. Elastic waistband and ankle cuffs ensure a snug fit. Tapered silhouette boosts movement. Ideal for gym, running, and daily training.",
+    "discountedPrice": 60,
+    "price": 100,
+    "quantity": 160,
+    "rating": 5,
+    "variants": {
+      "colorVariants": [
+        { "color": "darkslategray", "images": ["/images/joggers/performance_joggers.png"] },
+        { "color": "black", "images": [] },
+        { "color": "navy", "images": [] }
+      ],
+      "sizeVariants": ["small", "medium", "large", "x-large"]
+    },
+    onSale: true,
+    categoryId: 6
+  },
+  {
+    "id": "2",
+    "name": "Breathable Mesh Joggers",
+    "description": "Stay cool with these ultra-light joggers featuring mesh panels. Designed for airflow and high performance. Elasticated waist and zippered pockets for comfort and utility. Built for gym sessions and HIIT. Looks great even post-workout.",
+    "discountedPrice": 85,
+    "price": 95,
+    "quantity": 120,
+    "rating": 4,
+    "variants": {
+      "colorVariants": [
+        { "color": "lightgray", "images": ["/images/joggers/mesh_joggers.png"] },
+        { "color": "gray", "images": [] },
+        { "color": "slategray", "images": [] },
+        
+      ],
+      "sizeVariants": ["small", "medium", "large", "x-large"]
+    },
+    categoryId: 6
+  },
+  {
+    "id": "3",
+    "name": "Stretch Fit Training Joggers",
+    "description": "Made with durable stretch fabric for squats and sprints. Athletic fit enhances movement without restriction. Quick-dry fabric keeps sweat in check. Side stripe adds sporty edge. Great for both gym and warm-up routines.",
+    "discountedPrice": 79,
+    "price": 90,
+    "quantity": 140,
+    "rating": 4,
+    "variants": {
+      "colorVariants": [
+        { "color": "darkolivegreen", "images": ["/images/joggers/stretch_fit_joggers.png"] },
+        { "color": "black", "images": [] },
+        { "color": "steelblue", "images": [] }
+      ],
+      "sizeVariants": ["small", "medium", "large", "x-large"]
+    },
+    categoryId: 6
+  },
+  {
+    "id": "4",
+    "name": "High-Rise Active Joggers",
+    "description": "Designed for active women with a flattering high-rise fit. Stretch fabric supports freedom of movement. Moisture-wicking and quick-dry material keeps you fresh. Features side pockets and a soft waistband. Ideal for yoga, cardio, or strength training.",
+    "discountedPrice": 95,
+    "price": 100,
+    "quantity": 110,
+    "rating": 5,
+    "variants": {
+      "colorVariants": [
+        { "color": "deeppink", "images": ["/images/joggers/highrise_joggers.png"] },
+        { "color": "black", "images": [] },
+        { "color": "slategray", "images": [] }
+      ],
+      "sizeVariants": ["small", "medium", "large", "x-large"]
+    },
+    categoryId: 6
+  },
+  {
+    "id": "5",
+    "name": "Breathable Mesh Panel Joggers",
+    "description": "Lightweight joggers with breathable mesh panels for airflow. Crafted with quick-dry polyester for intense workouts. Stylish contrast piping on sides. Elastic waistband with inner drawstring for a custom fit. Perfect for gym, pilates, or Zumba sessions.",
+    "discountedPrice": 89,
+    "price": 99,
+    "quantity": 90,
+    "rating": 4,
+    "variants": {
+      "colorVariants": [
+        { "color": "lightcoral", "images": ["/images/joggers/mesh_panel_joggers.png"] },
+        { "color": "darkmagenta", "images": [] },
+        { "color": "gray", "images": [] }
+      ],
+      "sizeVariants": ["small", "medium", "large", "x-large"]
+    },
+    categoryId: 6
+  }
+];
+
+const PARTY_DRESSES: Product[] = [
+  {
+    "id": "1",
+    "name": "Sequin Bodycon Party Dress",
+    "description": "Turn heads with this shimmering bodycon dress. Covered in sparkling sequins for a bold, festive vibe. Designed with a sleeveless cut and scoop neckline. Stretchable fabric ensures a snug, flattering fit. Ideal for club nights or celebrations.",
+    "price": 150,
+    "quantity": 80,
+    "rating": 5,
+    "variants": {
+      "colorVariants": [
+        { "color": "gold", "images": ["/images/party_dresses/bodycon.png"] },
+        { "color": "silver", "images": [] },
+        { "color": "black", "images": [] }
+      ],
+      "sizeVariants": ["small", "medium", "large", "x-large"]
+    },
+    categoryId: 8,
+  },
+  {
+    "id": "2",
+    "name": "Ruffled One-Shoulder Dress",
+    "description": "Make a chic statement with this one-shoulder dress. Features dramatic ruffle detailing along the neckline. Lightweight, flowy fabric adds graceful movement. Perfect balance of elegance and fun. Great for cocktail parties or date nights.",
+    "discountedPrice": 89,
+    "price": 99,
+    "quantity": 100,
+    "rating": 4,
+    "variants": {
+      "colorVariants": [
+        { "color": "mediumvioletred", "images": ["/images/party_dresses/one_shoulder.png"] },
+        { "color": "crimson", "images": [] },
+        { "color": "midnightblue", "images": [] }
+      ],
+      "sizeVariants": ["small", "medium", "large", "x-large"]
+    },
+    categoryId: 8
+  },
+  {
+    "id": "3",
+    "name": "Satin Slip Party Dress",
+    "description": "Minimalist and glamorous satin slip dress. Features a soft sheen with a flattering drape. Adjustable spaghetti straps for a custom fit. Midi length offers classy coverage. Ideal for dinner parties and evening events.",
+    "discountedPrice": 75,
+    "price": 90,
+    "quantity": 120,
+    "rating": 4,
+    "variants": {
+      "colorVariants": [
+        { "color": "rosybrown", "images": ["/images/party_dresses/slip_dress.png"] },
+        { "color": "darkslategray", "images": [] },
+        { "color": "lavender", "images": [] }
+      ],
+      "sizeVariants": ["small", "medium", "large", "x-large"]
+    },
+    categoryId: 8
+  },
+  {
+    "id": "4",
+    "name": "Floral Fit & Flare Dress",
+    "description": "Flattering fit-and-flare silhouette with floral print. Sleeveless design with round neck and flared hem. Breathable and soft-touch fabric for all-night comfort. Adds playful charm to your party look. Pairs well with heels or sandals.",
+    "discountedPrice": 69,
+    "price": 85,
+    "quantity": 90,
+    "rating": 5,
+    "variants": {
+      "colorVariants": [
+        { "color": "coral", "images": ["/images/party_dresses/floral_dress.png"] },
+        { "color": "lightpink", "images": [] },
+        { "color": "orchid", "images": [] }
+      ],
+      "sizeVariants": ["small", "medium", "large", "x-large"]
+    },
+    categoryId: 8,
+    isNew: true
+  },
+  {
+    "id": "5",
+    "name": "Velvet Wrap Party Dress",
+    "description": "Elegant velvet dress with a wrap-front design. Soft, rich texture adds a luxurious feel. Waist tie detail for a flattering shape. V-neckline and long sleeves offer coverage and style. Perfect for winter parties and formal gatherings.",
+    "discountedPrice": 95,
+    "price": 100,
+    "quantity": 70,
+    "rating": 4,
+    "variants": {
+      "colorVariants": [
+        { "color": "darkred", "images": ["/images/party_dresses/velvet.png"] },
+        { "color": "indigo", "images": [] },
+        { "color": "slateblue", "images": [] }
+      ],
+      "sizeVariants": ["small", "medium", "large", "x-large"]
+    },
+    categoryId: 8,
+    isNew: true
+  },
+  
+];
+
+
+  
+export const PRODUCTS_LIST: Product[] = [...CASUAL_SHIRTS, ...CASUAL_TSHIRTS, ...FORMAL_SHIRTS, ...JOGGERS, ...PARTY_DRESSES].map((p, index) => {
     return {...p, id: (index+1).toString()}
 });
 

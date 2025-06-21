@@ -37,10 +37,15 @@ export const cartSlice = createSlice({
     removeItem: (state, action) => {
       const idx = state.items.findIndex(a => a.id == action.payload.id && a.colorvarinat == action.payload.colorvarinat && a.sizeVariant == action.payload.sizeVariant);
       state.items.splice(idx, 1);
-    }
+    },
+    clearCart: (state) => {
+      state.id = carInitailState.id;
+      state.createdOn = carInitailState.createdOn;
+      state.items = carInitailState.items;
+    },
   },
 });
 
-export const { addToCart, updateQuatity, removeItem } = cartSlice.actions;
+export const { addToCart, updateQuatity, removeItem, clearCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

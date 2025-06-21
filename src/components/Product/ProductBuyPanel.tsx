@@ -170,7 +170,7 @@ export const ProductBuyPanel = (props: Props) => {
                                             onClick={() => setSelectedColor(color)}
                                         >
                                             {selectedColor == color && <span className="absolute"> 
-                                                <FaCheck className="h-4 w-4" color="#ffff"/> 
+                                                <FaCheck className="h-4 w-4" color={`${color != 'white' ? '#ffff': '#000000'}`} /> 
                                             </span>}
                                         </div>
                                     );

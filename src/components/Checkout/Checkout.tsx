@@ -5,7 +5,9 @@ import { Header } from "../Home/Header"
 import { Footer } from "../Footer"
 import { Summary } from "./Summary"
 import { useReducer, useState } from "react";
-import { useRouter } from "next/router"
+import { useRouter } from "next/router";
+import { useDispatch } from "react-redux"
+import { clearCart } from "@/lib/cartSlice"
 
 const addressInitialState: Address = { firstName: '', lastName: '', streetAddress: '', city: '', state: '', country: 'United States', zipCode: '' };
 const addressErrorsInitialState: AddressErrors  = { firstName: false, lastName: false, streetAddress: false, city: false, state: false, country: false, zipCode: false };
@@ -102,6 +104,7 @@ export const Checkout = () => {
 
     const [showBillingAddress, setShowBillingAddress] = useState(false);
     const router = useRouter();
+    const dispatch = useDispatch();
 
     const handleBillingAddressCheckbox = (isChecked: boolean) => {
         if (isChecked) {
@@ -275,7 +278,8 @@ export const Checkout = () => {
         if (!deliveryAddressValid || !billingAddressValid || !paymentInfoValid) {
             return;
         }
-
+        
+        dispatch(clearCart());
         goToPage("/thankyou");   
     }
 

@@ -8,7 +8,7 @@ const dressStyles = [
     { label: "Formal", dressStyle: DRESS_STYLE.FORMAL, image: "/dress-style-grid/P2.jpg" }
   ],
   [ 
-    { label: "Party", dressStyle: DRESS_STYLE.PARTY, image: "/dress-style-grid/P3.jpg" },
+    { label: "Party", dressStyle: DRESS_STYLE.PARTY, image: "/dress-style-grid/p3.jpg" },
     { label: "Gym", dressStyle: DRESS_STYLE.GYM, image: "/dress-style-grid/P4.jpg" }
   ]
 ];

@@ -37,6 +37,10 @@ export const ProductList = (props: Props) => {
     }, [page]);
 
     useEffect(() => {
+        setPage(0);        
+    }, [props.products]);
+
+    useEffect(() => {
         let products: Product[] = [];
 
         if (selectedSort == SORT_OPTIONS.MOST_POPULAR)
@@ -98,7 +102,7 @@ export const ProductList = (props: Props) => {
                 <div className="mt-auto">
                     <Pagination>
                         <PaginationContent>
-                            <PaginationItem onClick={() => updatePageSize(-1)}>
+                            <PaginationItem className={`${(page-1 >= 0) ? 'cursor-pointer' : 'cursor-not-allowed'}`} onClick={() => updatePageSize(-1)}>
                                 <PaginationPrevious />
                             </PaginationItem>
                             {
@@ -111,7 +115,7 @@ export const ProductList = (props: Props) => {
                                     </PaginationItem>)
                                 })
                             }
-                            <PaginationItem onClick={() => updatePageSize(1)}>
+                            <PaginationItem className={`${(page+1 < Math.ceil(products.length/PAGE_SIZE)) ? 'cursor-pointer' : 'cursor-not-allowed'}`} onClick={() => updatePageSize(1)}>
                                 <PaginationNext />
                             </PaginationItem>
                         </PaginationContent>

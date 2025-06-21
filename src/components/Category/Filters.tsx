@@ -48,6 +48,8 @@ export const Filters = (props: Props) => {
     // might need to have individual min, max useState
     useEffect(() => {
         setPrice([filterOptions.price.min, filterOptions.price.max]);
+        setSelectedSizes([]);
+        setSelectedColors([]);
     }, [filterOptions]);
 
     useEffect(() => {
@@ -172,7 +174,7 @@ export const Filters = (props: Props) => {
                                             onClick={() => selectColor(color)}
                                         >
                                             {selectedColors.includes(color) && <span className="absolute"> 
-                                                <FaCheck className="h-4 w-4" color="#ffff"/> 
+                                                <FaCheck className="h-4 w-4" color={`${color != 'white' ? '#ffff': '#000000'}`} /> 
                                             </span>}
                                         </div>
                                     );

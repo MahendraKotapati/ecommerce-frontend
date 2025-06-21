@@ -17,7 +17,7 @@ export class ProductService {
     }
 
     getTopSellingProducts() {
-        return PRODUCTS_LIST;
+        return PRODUCTS_LIST.filter(p => (p.rating || 0) >=4).sort((a, b) => (b.rating||0) - (a.rating || 0));
     }
 
     getOnSaleProducts() {
