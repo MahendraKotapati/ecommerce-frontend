@@ -24,10 +24,10 @@ export const ProductCard = (props: Props) => {
     
     return (
     <div className="cursor-pointer" onClick={goToProduct}>
-        {images.length > 0 && <img src={images[0]} className={`w-[295px] h-[295px] rounded-[20px] transform transition-transform duration-300 hover:scale-105 ${props.customStyles}`} />}
+        {images.length > 0 && <img src={images[0]} className={`w-[295px] h-[295px] rounded-[20px] transform transition-transform duration-300 hover:scale-105 max-sm:w-[160px] max-sm:h-[140px] ${props.customStyles}`} />}
         {images.length == 0 && <img src={NO_IMAGE_URL} className={`w-[295px] h-[295px] rounded-[20px] ${props.customStyles}`} /> }
 
-        <p className="text-[18px] mt-4 capitalize font-semibold">
+        <p className="text-[18px] mt-4 capitalize font-semibold max-sm:text-[16px]">
             {name.toLowerCase()}
         </p>
         <div className="flex">
@@ -44,13 +44,13 @@ export const ProductCard = (props: Props) => {
             <div  className="ml-2">{roundedRating.toFixed(1)}/<span className="text-secondary">5</span></div>
         </div>
         <div className="flex flex-row gap-2 items-center">
-            <div className="text-[20px] font-semibold tracking-tight">
+            <div className="text-[20px] font-semibold tracking-tight max-sm:text-base">
                 {"$" + (discountedPrice ?? price)}
             </div>
-            {discountedPrice && <div className="text-[20px] line-through font-semibold text-black opacity-40 tracking-normal">
+            {discountedPrice && <div className="text-[20px] line-through font-semibold text-black opacity-40 tracking-normal max-sm:text-base">
                 {"$" + price}
             </div>}
-            {discountedPrice && <div className={`bg-red-100 text-red-500 text-[12px] h-7 px-3.5 py-1.5 rounded-full flex items-center justify-center`}>
+            {discountedPrice && <div className={`bg-red-100 text-red-500 text-[12px] h-7 px-3.5 py-1.5 rounded-full flex items-center justify-center max-sm:text-[10px] max-sm:px-3 max-sm:py-1`}>
                 <span> {discountPercentage + "%"} </span>
             </div>}
         </div>

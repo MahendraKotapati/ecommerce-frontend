@@ -286,7 +286,7 @@ export const Checkout = () => {
     return (
         <>
         <div className="mx-[100px] mt-4 flex flex-col mb-18">
-            <Header basicHeader={false} customStyles="!py-3 !px-0" />
+            <Header customStyles="!py-3 !px-0" />
             <p className="text-4xl font-semibold mb-3 mt-6"> Checkout </p>
             <div className="flex gap-6">
                 <div className="w-7/12 flex flex-col gap-6">

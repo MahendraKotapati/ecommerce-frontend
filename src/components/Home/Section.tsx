@@ -1,4 +1,3 @@
-import { Product } from "@/models/Product";
 import { ProductCard } from "./ProductCard";
 import { Button } from "@/utils/components-shadcn/ui/button";
 import { useRouter } from "next/router";
@@ -21,9 +20,9 @@ export const Section = (props: Props) => {
     };
 
     return (
-        <div className={`mt-16 mx-[110px] flex flex-col items-center ${props.customStyles}`}>
-            <div className={"mb-8 uppercase text-5xl font-semibold"}> {sectionData.title} </div>
-            <div className="flex gap-4">
+        <div className={`mt-16 mx-[110px] flex flex-col items-center max-sm:mx-4 ${props.customStyles}`}>
+            <div className={"mb-8 uppercase text-5xl font-semibold max-sm:text-3xl"}> {sectionData.title} </div>
+            <div className="grid grid-cols-4 gap-4 max-sm:grid-cols-2">
                 {sectionData.products.map((product) => {
                     return (<ProductCard key={product.id}  product={product}></ProductCard>);
                 })}

@@ -133,9 +133,9 @@ const CASUAL_SHIRTS: Product[] = [
         rating: 5, 
         variants: {
             colorVariants: [
-                { color: "darkred", images: ["/images/P1_front.png", "/images/P1_back.png", "/images/P1_side.png"]},
-                { color: "green", images: ["/images/P1_green_front.png", "/images/P1_green_back.png", "/images/P1_green_side.png"]},
-                { color: "black", images: ["/images/P1_black_front.png", "/images/P1_black_back.png"]}
+                { color: "darkred", images: ["/images/shirts/P1_front.png", "/images/shirts/P1_back.png", "/images/shirts/P1_side.png"]},
+                { color: "green", images: ["/images/shirts/P1_green_front.png", "/images/shirts/P1_green_back.png", "/images/shirts/P1_green_side.png"]},
+                { color: "black", images: ["/images/shirts/P1_black_front.png", "/images/shirts/P1_black_back.png"]}
             ],
             sizeVariants : ["small", "medium", "large", "x-large"]
         },

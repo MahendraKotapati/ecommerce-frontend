@@ -1,5 +1,5 @@
 export const BigTitle = ({ children }: {children: any}) => (
-    <h1 className="text-5xl font-bold text-gray-900">{children}</h1>
+    <h1 className="text-5xl font-bold text-gray-900 max-sm:text-3xl">{children}</h1>
   );
   
   export const Title = ({ children, className = '' }: {children: any, className?: string}) => (
