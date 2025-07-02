@@ -116,7 +116,7 @@
   --radius-xl: calc(var(--radius) + 4px); 
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark2) {  /* revert it to 'dark' to enable dark mode */
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
@@ -129,7 +129,7 @@ body {
   font-family: "Poppins","Lato", "Open Sans", sans-serif , Arial, Helvetica, sans-serif;
 }
 
-.dark {
+.dark2 { /* revert it to 'dark' to enable dark mode */
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
