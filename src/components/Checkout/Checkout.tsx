@@ -285,11 +285,11 @@ export const Checkout = () => {
 
     return (
         <>
-        <div className="mx-[100px] mt-4 flex flex-col mb-18">
-            <Header customStyles="!py-3 !px-0" />
+        <div className="mx-[100px] mt-4 flex flex-col mb-18 max-sm:mx-4">
+            <Header customStyles="!py-3 !px-0 !mx-0 !mt-0" />
             <p className="text-4xl font-semibold mb-3 mt-6"> Checkout </p>
-            <div className="flex gap-6">
-                <div className="w-7/12 flex flex-col gap-6">
+            <div className="flex gap-6 max-sm:flex-col">
+                <div className="w-7/12 flex flex-col gap-6 max-sm:w-full">
                     <div className="flex flex-col gap-4 border border-border rounded-[20px] p-5 bg-[#f8f8f8]"> 
                         <Address  title="Delivery Address" 
                                 address={deliveryAddress}

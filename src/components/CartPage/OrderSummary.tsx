@@ -31,7 +31,7 @@ export const OrderSummary = () => {
     }
 
     return (
-        <div className="border border-border rounded-[20px] py-5 px-6 h-fit w-[500px]">
+        <div className="border border-border rounded-[20px] py-5 px-6 h-fit w-[500px] max-sm:w-full">
            <Title>  Order summary </Title>
            <div className="mt-2 flex flex-col gap-1.5">
                 <div className="flex justify-between">

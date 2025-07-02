@@ -31,7 +31,7 @@ export const CartItemList = () => {
                 cartItems.map((cartItem, index) => {
                     return (
                         <>
-                        <div className="flex gap-4 w-2xl">
+                        <div className="flex gap-4 w-2xl max-sm:w-full">
                             <img src={cartItem.imageUrl} className="w-28 h-28 rounded-[8px]" />
                             <div className="flex-1 flex flex-col">
                                 <div className="flex justify-between"> 

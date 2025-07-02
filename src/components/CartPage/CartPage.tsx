@@ -11,10 +11,10 @@ export const CartPage = () => {
     return (
     <>
         <Header />
-        <div className="mx-[100px] mt-4">
+        <div className="mx-[100px] mt-4 max-sm:mx-4">
             <p className="text-4xl font-semibold"> Your Cart </p>
             {cartItems.length > 0 && 
-                <div className="flex gap-4 mb-16 mt-4">
+                <div className="flex gap-4 mb-16 mt-4 max-sm:flex-col">
                  <CartItemList />
                  <OrderSummary />
                 </div>

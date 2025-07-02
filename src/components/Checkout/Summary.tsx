@@ -19,7 +19,7 @@ export const Summary = (props: Props) => {
     const total = (subTotal-((discountPercentate/100) * subTotal)+DELIVERY_FEE).toFixed(2);
 
   return (
-    <div className="w-5/12 h-fit flex flex-col border border-border rounded-[20px] p-5">
+    <div className="w-5/12 h-fit flex flex-col border border-border rounded-[20px] p-5 max-sm:w-full">
         <p className="text-xl font-semibold mb-4"> Order Summary </p>
         <div className="flex flex-col gap-3">
             {

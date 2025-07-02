@@ -202,8 +202,8 @@ export const ProductBuyPanel = (props: Props) => {
 
                     <hr className="border-border my-1"/>
                     <div className="flex gap-1.5 justify-center">
-                        <QuantityButton quantity={quantity} productId={id} colorvarinat={selectedColor} sizeVariant={selectedSize} updateQuantity={updateQuantityHandler} customStyles="w-[150px] w-1/4" />
-                        <Button className="rounded-full w-3/4 h-[44px] cursor-pointer bg-brand hover:bg-brand" onClick={addToCartHandler}> Add to Cart </Button>
+                        <QuantityButton quantity={quantity} productId={id} colorvarinat={selectedColor} sizeVariant={selectedSize} updateQuantity={updateQuantityHandler} customStyles="w-[150px] w-1/4 max-sm:w-2/5" />
+                        <Button className="rounded-full w-3/4 h-[44px] cursor-pointer bg-brand hover:bg-brand max-sm:w-3/5" onClick={addToCartHandler}> Add to Cart </Button>
                     </div>
                 </div>
             </div>
