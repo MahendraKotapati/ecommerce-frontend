@@ -94,18 +94,18 @@ export const ProductBuyPanel = (props: Props) => {
     }
 
     return (
-        <div className="mx-[108px] mt-8 mb-16"> 
-            <div className="flex gap-6 w-full">
+        <div className="mx-[108px] mt-8 mb-16 max-sm:mx-4"> 
+            <div className="flex gap-6 w-full max-sm:flex-col">
 
-                <div className="flex-1 flex gap-4">
-                    <div className="w-[150px] h-[500px] flex flex-col gap-4">
+                <div className="flex-1 flex gap-4 max-sm:flex-col-reverse">
+                    <div className="w-[150px] h-[500px] flex flex-col gap-4 max-sm:gap-2 max-sm:flex-row max-sm:w-full max-sm:h-auto">
                         {
                             productImages.slice(0, 3).map((imageUrl, index) => {
                                 return (
-                                    <div key={index} className="relative flex-1 flex cursor-pointer">
+                                    <div key={index} className="flex-1 flex cursor-pointer">
                                         <img src={imageUrl} 
                                             onClick={() => setSelectedImageIdx(index)} 
-                                            className={`absolute inset-0 w-full h-full rounded-[20px] 
+                                            className={`inset-0 w-full h-full rounded-[20px] max-sm:rounded-2xl max-sm:w-full max-sm:h-auto
                                                 ${imageUrl == NO_IMAGE_URL ? ' object-cover' : ' '}  
                                                  ${(index == selectedImageIdx) ? " border-2 border-brand" : " border border-border"}`}>    
                                         </img>
@@ -114,16 +114,16 @@ export const ProductBuyPanel = (props: Props) => {
                             })
                         }
                     </div>
-                    <div className="relative w-[444px] h-[500px] "> 
+                    <div className="w-[444px] h-[500px] max-sm:w-full max-sm:h-auto"> 
                         <img src={productImages[selectedImageIdx]} 
-                            className={`w-full h-full bg-border border border-border rounded-[20px] absolute inset-0 object-cover 
+                            className={`w-full h-full bg-border border border-border rounded-[20px] inset-0 object-cover max-sm:w-full max-sm:h-auto  
                                 ${productImages[selectedImageIdx] == NO_IMAGE_URL ? ' ' : ' transform transition-transform duration-300 hover:scale-105 '}`} 
                         /> 
                     </div>
                 </div>
 
                 <div className="flex-1 flex flex-col gap-3 w-full">
-                    <div className="text-4xl uppercase"> {name} </div>
+                    <div className="text-4xl uppercase max-sm:text-3xl"> {name} </div>
 
                     <div className="flex items-center">
                         <div className="flex gap-1 my-1">

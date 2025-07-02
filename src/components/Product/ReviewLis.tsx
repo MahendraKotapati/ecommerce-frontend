@@ -1,5 +1,5 @@
 import { BigTitle, SecondaryText, Title } from "@/utils/Typography";
-import { FaArrowLeft } from "react-icons/fa6";
+import { FaArrowLeft, FaPlus } from "react-icons/fa6";
 import { FaArrowRight } from "react-icons/fa6";
 import { Review, ReviewCard } from "../ReviewCard";
 import { REVIEWS_LIST } from "@/utils/Constant";
@@ -49,28 +49,31 @@ export const ReviewList = () => {
         <div className="mb-18 mt-16">
             <div className="flex justify-between items-center">
                 <Title> {SECTION_TITLE} </Title>
-                <div className="flex gap-1">
-                <DropdownMenu>
-                    <DropdownMenuTrigger className="bg-bg-custom-gray py-2 px-4 rounded-full"> 
-                        <div className="flex gap-4 items-center">
-                            <span className="capitalize"> {selectedSorting} </span> 
-                            <span> <FaChevronDown className='h-4 w-4' /> </span>
-                        </div>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                        <DropdownMenuItem onSelect={() => updateSorting(SORT_BY.LATEST)}> Latest </DropdownMenuItem>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem onSelect={() => updateSorting(SORT_BY.OLDEST)}> Oldest </DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
+                <div className="flex gap-1 max-sm:items-center max-sm:gap-3">
+                    <DropdownMenu>
+                        <DropdownMenuTrigger className="bg-bg-custom-gray py-2 px-4 rounded-full"> 
+                            <div className="flex gap-4 items-center">
+                                <span className="capitalize"> {selectedSorting} </span> 
+                                <span> <FaChevronDown className='h-4 w-4' /> </span>
+                            </div>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                            <DropdownMenuItem onSelect={() => updateSorting(SORT_BY.LATEST)}> Latest </DropdownMenuItem>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem onSelect={() => updateSorting(SORT_BY.OLDEST)}> Oldest </DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
 
-                <Button className="rounded-full" disabled={true}>Write Review</Button>
+                    <Button className="rounded-full max-sm:hidden" disabled={true}>Write Review</Button>
+                    <span className="hidden max-sm:block max-sm:p-1 max-sm:border-1 max-sm:border-border max-sm:rounded-full">
+                        <FaPlus className="h-5 w-5 cursor-pointer text-black opacity-30" />
+                    </span>
                 </div>
             </div>
 
-            <div className={`grid grid-cols-2 gap-3 mt-8`}>
+            <div className={`grid grid-cols-2 gap-3 mt-8 max-sm:grid-cols-1`}>
                 {reviewList.map((review, index) => {
-                    return <ReviewCard key={review.id + " " + index} review={review} showDate={true} />
+                    return <ReviewCard key={review.id + " " + index} review={review} showDate={true} customStyles="max-sm:p-5" />
                 })}
             </div>
         </div>

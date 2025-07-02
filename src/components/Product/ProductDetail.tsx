@@ -47,11 +47,11 @@ export const ProductDetail = () => {
             <Header />
             {!isLoading && <ProductBuyPanel product={product}/>}
 
-            <div className="mx-[108px]"> 
+            <div className="mx-[108px] max-sm:mx-4"> 
                 <div className="flex w-full text-center"> 
                     {
                         TAB_LIST.map((tab) => {
-                            return <div className={`flex-1 py-3 border-b cursor-pointer text-base 
+                            return <div className={`flex-1 py-3 border-b cursor-pointer text-base max-sm:text-sm  
                                         ${(selectedTab == tab ? ' border-b-2 border-foreground' : ' border-border text-secondary')}`} 
                                         key={tab}
                                         onClick={() => setSelectedTab(tab)}
