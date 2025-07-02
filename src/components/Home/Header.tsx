@@ -5,13 +5,13 @@ import { FaCircleUser } from "react-icons/fa6";
 import { IoSearch } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { Store } from "@/lib/store";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { PRODUCTS_LIST, SPECIAL_FILTERS } from "@/utils/Constant";
 import { Product } from "@/models/Product";
 import { FaXmark } from "react-icons/fa6";
 import { IoMenu } from "react-icons/io5";
 import { useIsMobile } from "@/customHooks/useIsMobile";
-import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/utils/components-shadcn/ui/drawer";
+import { Drawer, DrawerClose, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/utils/components-shadcn/ui/drawer";
 import { Popover, PopoverContent, PopoverTrigger } from "@/utils/components-shadcn/ui/popover";
 
 const navigation = [
@@ -33,6 +33,7 @@ export const Header = (props: Props) => {
     const [searchResults, setSearchResults] = useState<Product[]>([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [isSearchPopupOpen, setIsSearchPopupOpen] = useState(false);
+    const menuOptionsCloseRef = useRef<any>(null);
     const isMobile = useIsMobile();
 
 
@@ -100,11 +101,14 @@ export const Header = (props: Props) => {
                     </DrawerHeader>
                     <div className="pl-4">
                         {navigation.map((nav) => {
-                            return <div key={nav.navTitle} onClick={() =>goToPage(nav.navLink)} className={"text-base font-normal my-1"}> {nav.navTitle} </div>
+                            return <div key={nav.navTitle} onClick={() => {goToPage(nav.navLink); menuOptionsCloseRef.current.click();}} className={"text-base font-normal my-1"}> {nav.navTitle} </div>
                         })}
                     </div>
                 </DrawerContent>
-                </Drawer>
+                <DrawerClose> 
+                    <span ref={menuOptionsCloseRef}> </span>
+                </DrawerClose>
+            </Drawer>
         );
     }
 

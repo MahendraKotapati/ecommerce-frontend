@@ -17,11 +17,11 @@ export const Footer = () => {
     return (
         <div className="bg-[#F0F0F0] px-20 py-15 flex flex-col max-sm:px-4 max-sm:py-10">
             <div className="flex max-sm:flex-col">
-                <div className="max-w-[260px] mr-6 flex flex-col max-sm:mb-1">
+                <div className="max-w-[260px] mr-6 flex flex-col max-sm:mb-1 max-sm:mr-0 max-sm:max-w-full">
                     <Title> {BRAND_NAME} </Title>
                     <SecondaryText className="mt-2"> {BRAND_INFO} </SecondaryText>
 
-                    <div className="flex gap-1 mt-auto max-sm:mt-1.5"> 
+                    <div className="flex gap-1 mt-auto max-sm:mt-2.5"> 
                         <div className="w-8 h-8 bg-white border border-tertiary rounded-full flex items-center justify-center">
                             <FaInstagram className="h-4 w-4" />
                         </div>

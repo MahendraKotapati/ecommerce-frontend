@@ -51,7 +51,7 @@ export const ReviewList = () => {
                 </div>
             </div>
             <div className="flex overflow-x-hidden">
-                <div className={`grid grid-cols-3 gap-3 mt-8 ml-[108px] max-sm:grid-cols-1 max-sm:ml-4`} style={{minWidth: (isMobile ? '' : 'calc(100vw - 216px)'), maxWidth: (isMobile ? '' : 'calc(100vw - 216px)')}}> 
+                <div className={`grid grid-cols-3 gap-3 mt-8 ml-[108px] max-sm:grid-cols-1 max-sm:mx-4`} style={{minWidth: (isMobile ? '' : 'calc(100vw - 216px)'), maxWidth: (isMobile ? '' : 'calc(100vw - 216px)')}}> 
                     {visibleReviews.map((review) => {
                         return <ReviewCard key={review.id} review={review} customStyles="" />
                     })}

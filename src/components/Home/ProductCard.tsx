@@ -24,7 +24,7 @@ export const ProductCard = (props: Props) => {
     
     return (
     <div className="cursor-pointer" onClick={goToProduct}>
-        {images.length > 0 && <img src={images[0]} className={`w-[295px] h-[295px] rounded-[20px] transform transition-transform duration-300 hover:scale-105 max-sm:w-[160px] max-sm:h-[140px] ${props.customStyles}`} />}
+        {images.length > 0 && <img src={images[0]} className={`w-[295px] h-[295px] rounded-[20px] transform transition-transform duration-300 hover:scale-105 max-sm:!w-full max-sm:!h-auto  ${props.customStyles}`} />}
         {images.length == 0 && <img src={NO_IMAGE_URL} className={`w-[295px] h-[295px] rounded-[20px] ${props.customStyles}`} /> }
 
         <p className="text-[18px] mt-4 capitalize font-semibold max-sm:text-[16px]">

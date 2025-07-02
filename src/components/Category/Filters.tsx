@@ -1,11 +1,12 @@
 import { CATEGORIES_LIST } from "@/utils/Constant";
 import { useEffect, useState } from "react";
 import { FiSliders } from "react-icons/fi";
-import { FaChevronDown, FaChevronUp, FaChevronRight, FaCheck } from "react-icons/fa6";
+import { FaChevronDown, FaChevronUp, FaChevronRight, FaCheck, FaXmark } from "react-icons/fa6";
 
 import * as Slider from "@radix-ui/react-slider";
 import { Button } from "@/utils/components-shadcn/ui/button";
 import { useRouter } from "next/router";
+import { useIsMobile } from "@/customHooks/useIsMobile";
 
 
 export interface FilterOptions {
@@ -19,17 +20,19 @@ interface Props {
     setSelectedFilters: (filterOptions: FilterOptions) => void;
     applyFilter: () => void;
     disableFilters: boolean;
+    closeFilters: () => any;
 }
 
 export const Filters = (props: Props) => {
 
-    const {filterOptions, setSelectedFilters, applyFilter, disableFilters} = {...props};
+    const {filterOptions, setSelectedFilters, applyFilter, disableFilters, closeFilters} = {...props};
     const [categories, setCategories] = useState(CATEGORIES_LIST);
     const [price, setPrice] = useState<number[]>([filterOptions.price.min, filterOptions.price.max]);
     const [filtersOpenState, setFilterOpenState] = useState({price: true, color: true, size: true});
     const [selectedColors, setSelectedColors] = useState<string[]>([]);
     const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
     const router = useRouter();
+    const isMobile = useIsMobile();
 
     const colorBgMap: {[color: string] : string} = {};
 
@@ -97,17 +100,18 @@ export const Filters = (props: Props) => {
 
     const goToCategory = (id: number) => {
         router.push(`/category/${id}`);
+        closeFilters();
     };
 
     return (
-        <div className="py-5 px-6">
+        <div className="py-5 px-6 max-sm:pt-0">
 
-            <div className="flex justify-between items-center">
-                <p className="text-base font-semibold"> Filters </p>
+            <div className="flex justify-between items-center max-sm:hidden">
+                <p className="text-base font-semibold max-sm:text-xl"> Filters </p>
                 <FiSliders className='h-4 w-4' />
             </div>
 
-            <hr className="border-border my-4" />
+            <hr className="border-border my-4 max-sm:my-3" />
 
             <div className="flex flex-col gap-2">
                 {
@@ -215,7 +219,7 @@ export const Filters = (props: Props) => {
                 }
             </div>
 
-            <Button className="w-full h-[44px] rounded-full mt-6 cursor-pointer bg-brand hover:bg-brand" onClick={applyFilter}> 
+            <Button className="w-full h-[44px] rounded-full mt-6 cursor-pointer bg-brand hover:bg-brand" onClick={() => {applyFilter(); closeFilters();}}> 
                 Apply Filter 
             </Button>
 

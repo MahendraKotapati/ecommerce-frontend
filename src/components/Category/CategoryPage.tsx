@@ -113,17 +113,16 @@ export const CategoryPage = () => {
     return (
         <div className="scrollbar-hidden h-[100vh]">
              <Header />
-             <div className="mx-[100px] mt-6 mb-8">
+             <div className="mx-[100px] mt-6 mb-8 max-sm:mx-4">
                 <div className="flex gap-8">
-                    <div className="w-[295px] border border-border rounded-[20px] h-fit"> 
-                        {!isLoading && 
-                            <Filters  filterOptions={filterOptions}  
-                                      setSelectedFilters={setSelectedFilters} 
-                                      applyFilter={applyFilter} 
-                                      disableFilters={products.length == 0}
-                        />}
-                    </div>
-                    <ProductList products={filteredProducts} title={title} />
+                    <ProductList 
+                        products={filteredProducts} title={title} 
+                        filterOptions={filterOptions}  
+                        setSelectedFilters={setSelectedFilters} 
+                        applyFilter={applyFilter} 
+                        disableFilters={products.length == 0}
+                        isLoading={isLoading}
+                    />
                 </div>
              </div>
              <Footer />

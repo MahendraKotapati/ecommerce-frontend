@@ -71,7 +71,7 @@ export const Banner = () => {
                 </div>
             </div>
             <div className="relative">
-                <img src="/banner_mobile.jpg" style={{width: "100%", height: 450}}></img>
+                <img src="/banner_mobile.jpg" style={{width: "100%", height: "auto"}}></img>
                 <img src="/special_star.svg" className="absolute top-28 left-7 w-11 h-11"></img> 
                 <img src="/special_star.svg" className="absolute top-12 right-4 w-[76px] h-[76px]"></img> 
             </div>
